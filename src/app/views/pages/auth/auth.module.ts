@@ -5,6 +5,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './login/login.component';
 import { AuthComponent } from './auth.component';
 import { RegisterComponent } from './register/register.component';
+import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 
 const routes: Routes = [
   {
@@ -15,6 +16,9 @@ const routes: Routes = [
       },
       { 
         path: 'signup', component: RegisterComponent
+      },
+      { 
+        path: 'forgot-password', component: ForgotPasswordComponent
       }
     ]
   }
@@ -24,7 +28,8 @@ const routes: Routes = [
   declarations: [
     AuthComponent,// OMG, IMPORTANT TO USE ROUTER-OUTLET ON AUTH COMPONENT HTML
     LoginComponent,
-    RegisterComponent 
+    RegisterComponent,
+    ForgotPasswordComponent 
   ],
   imports: [
     CommonModule,
