@@ -1,1 +1,29 @@
-<p>login works!</p>
+<div class="container">
+	<h1 class="brand"><a [routerLink]="['']">Under <span>CTRL</span></a></h1>
+	<form class="container px-5">
+
+		<div class="row align-items-center justify-content-center">
+			<div class="mb-3">
+				<label for="email" class="form-label">Email</label>
+				<input type="email" class="form-control" id="email">
+				</div>
+				<div class="mb-3">
+				<label for="password" class="form-label">Password</label>
+				<input type="password" class="form-control" id="password">
+				</div>
+		</div>
+		
+		<div class="d-flex justify-content-end mb-4">
+			<a class="link-primary" [routerLink]="['forgot-password']">Forgot pasword</a>
+		</div>
+
+		<div class="d-flex flex-column mb-5">
+			<button type="submit" class="btn btn-primary flex-fill">Sign In</button>
+		</div>
+
+		<div class="d-flex justify-content-center">
+			<p class="text-white">Don't have an account yet? <a [routerLink]="['signup']" class="link-primary">Sign Up</a></p>
+		</div>
+
+	</form>
+</div>
