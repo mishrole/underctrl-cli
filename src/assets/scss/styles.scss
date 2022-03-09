@@ -1,0 +1,57 @@
+@import "variables.scss";
+@import "fonts.scss";
+@import "components.scss";
+@import "~@ng-select/ng-select/themes/default.theme.css";
+
+:root {
+    --font-family: "Roboto", Arial, Helvetica, sans-serif;
+    --box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+
+    --white-color-dark-text: rgba(255,255,255,0.9);
+    --white-color-dark-subtext: rgba(255,255,255,0.7);
+    --white-color-dark-text-disabled: rgba(255,255,255,0.5);
+
+    --primary-color-dark-full: #38b2ac;
+    --primary-color-dark-bg: rgba(49, 151, 149, 0.7);
+    --primary-color-dark-text: #e6fffa;
+    --primary-color-dark-soft-bg: rgba(129, 230, 217, 0.7);
+
+    --danger-color-dark-full: rgba(245, 101, 101, 1);
+
+    // Gray
+
+    --background-color-dark-full: #1a202c;
+    --background-color-dark-soft: #2d3748;
+
+    --secondary-color-dark-full: #4a5568;
+    --secondary-color-dark-soft-bg: rgba(74, 85, 104, 0.7);
+
+    --accent-color-dark-full: #cbd5e0;
+    --accent-color-dark-soft: rgba(203, 213, 224, 0.3);
+
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: var(--font-family);
+}
+
+html,
+body {
+    position: relative;
+    min-height: 100vh;
+    width: 100%;
+    // overflow: hidden;
+    overflow: auto;
+}
+
+.text-muted {
+    color: var(--white-color-dark-text-disabled);
+}
+
+// sweetalert
+.swal2-title {
+    font-size: 1rem !important;
+}
