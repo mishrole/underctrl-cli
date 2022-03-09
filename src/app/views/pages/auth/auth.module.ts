@@ -4,6 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './login/login.component';
 import { AuthComponent } from './auth.component';
+import { RegisterComponent } from './register/register.component';
 
 const routes: Routes = [
   {
@@ -11,6 +12,9 @@ const routes: Routes = [
     children: [
       {
         path: '', component: LoginComponent
+      },
+      { 
+        path: 'signup', component: RegisterComponent
       }
     ]
   }
@@ -19,7 +23,8 @@ const routes: Routes = [
 @NgModule({
   declarations: [
     AuthComponent,// OMG, IMPORTANT TO USE ROUTER-OUTLET ON AUTH COMPONENT HTML
-    LoginComponent 
+    LoginComponent,
+    RegisterComponent 
   ],
   imports: [
     CommonModule,
