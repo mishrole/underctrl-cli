@@ -6,6 +6,14 @@
     background-color: var(--background-color-dark-full);
 }
 
+.error-message span :nth-child(odd) {
+	color: var(--primary-color-dark-full);
+}
+
+.error-message span:nth-child(even) {
+	color: var(--white-color-dark-text);
+}
+
 .brand {
 	
 	text-align: center;
