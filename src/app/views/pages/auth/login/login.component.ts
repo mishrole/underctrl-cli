@@ -92,12 +92,12 @@ export class LoginComponent implements OnInit {
           user.email = res?.email || '';
 
           const session = new Session(res?.access_token, res?.refresh_token, user);
-          console.warn('guardar session', session);
+          console.warn('save session', session);
 
           this.authService.saveSession(session);
           this.redirectToHome();
 
-          this.util.success("Login");
+          this.util.success("Success! You logged in");
         }, err => {
           console.warn(err);
           this.util.error("", err?.error.error_description);

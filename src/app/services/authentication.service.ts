@@ -5,6 +5,7 @@ import { environment } from 'src/environments/environment';
 import { Constants } from '../core/constants';
 import { MenuItem } from '../models/menu-item';
 import { LoginRequest } from '../models/request/login.request';
+import { RefreshTokenRequest } from '../models/request/refresh-token.request';
 import { BaseResponse } from '../models/response/base.response';
 import { LoginResponse } from '../models/response/login.response';
 import { Session } from '../models/session';
@@ -24,6 +25,20 @@ export class AuthenticationService {
     params.append("grant_type", loginRequest.grant_type);
     params.append("password", loginRequest.password);
     params.append("username", loginRequest.username);
+
+    let headers = new HttpHeaders({
+      'Authorization': 'Basic ' + btoa(`${Constants.API_USER}:${Constants.API_PWD}`),
+      'Content-type': 'application/x-www-form-urlencoded; charset=utf-8'
+    });
+
+    return this.http.post<LoginResponse>(`${environment.api}/oauth/token`, params.toString(), {headers: headers});
+  }
+
+  refreshToken(refreshTokenRequest : RefreshTokenRequest): Observable<LoginResponse> {
+
+    const params = new URLSearchParams();
+    params.append("grant_type", refreshTokenRequest.grant_type);
+    params.append("refresh_token", refreshTokenRequest.refresh_token);
 
     let headers = new HttpHeaders({
       'Authorization': 'Basic ' + btoa(`${Constants.API_USER}:${Constants.API_PWD}`),
