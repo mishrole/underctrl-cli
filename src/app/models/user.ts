@@ -8,6 +8,7 @@ export class User {
 	email: string;
 	birthday: Date;
 	password: string;
+	confirm?: string;
 	createdAt: Date;
 	updatedAt: Date;
 	deleted: boolean;

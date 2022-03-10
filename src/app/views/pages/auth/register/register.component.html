@@ -1,30 +1,54 @@
 <div class="container">
 	<h1 class="brand"><a [routerLink]="['']">Under <span>CTRL</span></a></h1>
-	<form class="container px-4">
+	<form [formGroup]="registerFormGroup" (ngSubmit)="register()" class="container px-4">
 		<div class="row align-items-center justify-content-center mb-3">
 			<div class="col-6 mb-3">
 				<label for="firstname" class="form-label">First Name</label>
-				<input type="text" class="form-control" id="firstname">
+				<input type="text" class="form-control" id="firstname" formControlName="Firstname">
+				<div *ngIf="frmRegister['Firstname'].invalid && (frmRegister['Firstname'].dirty || frmRegister['Firstname'].touched)">
+					<span class="text-danger" *ngIf="frmRegister['Firstname'].hasError('required')">Firstname is required</span>
+				</div>
 			</div>
 			<div class="col-6 mb-3">
 				<label for="lastname" class="form-label">Last Name</label>
-				<input type="text" class="form-control" id="lastname">
+				<input type="text" class="form-control" id="lastname" formControlName="Lastname">
+				<div *ngIf="frmRegister['Lastname'].invalid && (frmRegister['Lastname'].dirty || frmRegister['Lastname'].touched)">
+					<span class="text-danger" *ngIf="frmRegister['Lastname'].hasError('required')">Lastname is required</span>
+				</div>
 			</div>
 			<div class="mb-3">
 				<label for="birthday" class="form-label">Date of birth</label>
-				<input type="date" class="form-control" id="birthday">
+				<input type="date" class="form-control" id="birthday" max="{{today | date:'yyyy-MM-dd'}}" formControlName="Birthday">
+				<div *ngIf="frmRegister['Birthday'].invalid && (frmRegister['Birthday'].dirty || frmRegister['Birthday'].touched)">
+					<span class="text-danger" *ngIf="frmRegister['Birthday'].hasError('required')">Date of Birth is required</span>
+				</div>
 			</div>
 			<div class="mb-3">
 				<label for="email" class="form-label">Email</label>
-				<input type="email" class="form-control" id="email">
+				<input type="email" class="form-control" id="email" formControlName="Email">
+				<div *ngIf="frmRegister['Email'].invalid && (frmRegister['Email'].dirty || frmRegister['Email'].touched)">
+					<span class="text-danger" *ngIf="frmRegister['Email'].hasError('required')">Email is required</span>
+					<span class="text-danger" *ngIf="frmRegister['Email'].hasError('email')">Email is invalid</span>
+				</div>
 			</div>
 			<div class="mb-3">
 				<label for="password" class="form-label">Password</label>
-				<input type="password" class="form-control" id="password">
+				<input type="password" class="form-control" id="password" formControlName="Password">
+				<div *ngIf="frmRegister['Password'].invalid && (frmRegister['Password'].dirty || frmRegister['Password'].touched)">
+					<span class="text-danger" *ngIf="frmRegister['Password'].hasError('required')">Password is required</span>
+					<span class="text-danger" *ngIf="frmRegister['Password'].hasError('minlength')">Password must have 8-128 characters long</span>
+					<span class="text-danger" *ngIf="frmRegister['Password'].hasError('maxlength')">Password must have 8-128 characters long</span>
+				</div>
 			</div>
 			<div class="mb-3">
 				<label for="confirm" class="form-label">Confirm Password</label>
-				<input type="password" class="form-control" id="confirm">
+				<input type="password" class="form-control" id="confirm" formControlName="Confirm">
+				<div *ngIf="frmRegister['Confirm'].invalid && (frmRegister['Confirm'].dirty || frmRegister['Confirm'].touched)">
+					<span class="text-danger" *ngIf="frmRegister['Confirm'].hasError('required')">Confirm Password is required</span>
+					<span class="text-danger" *ngIf="frmRegister['Confirm'].hasError('minlength')">Confirm Password must have 8-128 characters long</span>
+					<span class="text-danger" *ngIf="frmRegister['Confirm'].hasError('maxlength')">Confirm Password must have 8-128 characters long</span>
+					<span class="text-danger" *ngIf="frmRegister['Confirm'].hasError('notSame')">Confirm Password and Password doesn't match</span>
+				</div>
 			</div>
 		</div>
 

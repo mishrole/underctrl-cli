@@ -1,5 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { FormArray, FormGroup } from '@angular/forms';
 import Swal from 'sweetalert2';
 
 const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
@@ -97,5 +98,14 @@ export class UtilService {
       }
     });
   }
+
+  markFormTouched(group: FormGroup | FormArray) {
+    const controls: any = group.controls;
+    Object.keys(controls).forEach((key: string) => {
+      const control = controls[key];
+      if (control instanceof FormGroup || control instanceof FormArray) { control.markAsTouched(); this.markFormTouched(control); }
+      else { control.markAsTouched(); };
+    });
+  };
 
 }

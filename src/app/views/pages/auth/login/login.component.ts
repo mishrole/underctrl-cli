@@ -27,7 +27,7 @@ export class LoginComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private authService: AuthenticationService,
     private spinner: NgxSpinnerService,
-    private util: UtilService,
+    private utilService: UtilService,
     private formBuilder: FormBuilder,
   ) {
     this.savedSession = this.authService.getSession();
@@ -62,15 +62,16 @@ export class LoginComponent implements OnInit {
     // console.info('this.loginFormGroup', this.loginFormGroup);
     // console.info('this.frmLogin', this.frmLogin);
 
-    this.markFormTouched(this.loginFormGroup);
+    this.utilService.markFormTouched(this.loginFormGroup);
 
     if (this.loginFormGroup.valid) {
       this.spinner.show();
 
-      const loginRequest = new LoginRequest();
-      loginRequest.username = this.frmLogin.Email.value.trim();
-      loginRequest.password = this.frmLogin.Password.value;
-      loginRequest.grant_type = Constants.GRANT_TYPE_TOKEN;
+      const loginRequest = new LoginRequest(
+        this.frmLogin.Email.value.trim(),
+        this.frmLogin.Password.value,
+        Constants.GRANT_TYPE_TOKEN
+      );
 
         this.authService.oauth(loginRequest).subscribe(res => {
 
@@ -93,22 +94,21 @@ export class LoginComponent implements OnInit {
           user.email = res?.email || '';
 
           const session = new Session(res?.access_token, res?.refresh_token, user);
-          console.warn('save session', session);
-
           this.authService.saveSession(session);
+          console.warn('saved session', session);
           this.redirectToHome();
 
-          this.util.success("Success! You logged in");
+          // this.utilService.success("Success! You logged in");
         }, err => {
-          console.warn(err);
-          this.util.error("", err?.error.error_description);
           this.spinner.hide();
+          console.warn(err);
+          this.utilService.error("", err?.error.error_description);
         }, () => {
           this.spinner.hide(); 
           }
         );
     } else {
-      this.util.warn("Please review the information entered");
+      this.utilService.warn("Please review the information entered");
     }
 
   }
@@ -117,13 +117,13 @@ export class LoginComponent implements OnInit {
     this.router.navigate(['/home']);
   }
 
-  private markFormTouched(group: FormGroup | FormArray) {
-    const controls: any = group.controls;
-    Object.keys(controls).forEach((key: string) => {
-      const control = controls[key];
-      if (control instanceof FormGroup || control instanceof FormArray) { control.markAsTouched(); this.markFormTouched(control); }
-      else { control.markAsTouched(); };
-    });
-  };
+  // private markFormTouched(group: FormGroup | FormArray) {
+  //   const controls: any = group.controls;
+  //   Object.keys(controls).forEach((key: string) => {
+  //     const control = controls[key];
+  //     if (control instanceof FormGroup || control instanceof FormArray) { control.markAsTouched(); this.markFormTouched(control); }
+  //     else { control.markAsTouched(); };
+  //   });
+  // };
 
 }
