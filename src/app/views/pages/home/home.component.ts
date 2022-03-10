@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { Account } from 'src/app/models/account';
+import { AccountService } from 'src/app/services/account.service';
 import { AuthenticationService } from 'src/app/services/authentication.service';
+import { UtilService } from 'src/app/services/util.service';
 
 
 @Component({
@@ -10,7 +14,15 @@ import { AuthenticationService } from 'src/app/services/authentication.service';
 export class HomeComponent implements OnInit {
 
   user: any;
-  constructor(private authService: AuthenticationService) { }
+  balance: number;
+  accounts: Account[];
+
+  constructor(
+    private authService: AuthenticationService,
+    private accountService: AccountService,
+    private spinner: NgxSpinnerService,
+    private util: UtilService,
+  ) { }
 
   ngOnInit(): void {
     if (sessionStorage.getItem('auth') != null) {
@@ -18,7 +30,36 @@ export class HomeComponent implements OnInit {
       console.log('RES', res);
       this.user = res.user;
     }
+
+    this.getAccounts();
+    
   }
+
+  getAccounts(): void {
+    this.spinner.show();
+
+    this.accountService.allAccountsByOwner(this.user.id).subscribe(res => {
+      console.log('allAccountsByOwner', res.data);
+      this.accounts = res.data;
+      // this.balance = this.calculateTotalBalance();
+    }, err => {
+      console.warn(err);
+      this.util.error("", err?.detail);
+      this.spinner.hide();
+    }, () => {
+      this.spinner.hide(); 
+      }
+    );
+  }
+
+  // calculateTotalBalance(): number {
+  //   let total = 0;
+  //   for (let account of this.accounts) {
+  //     total += account.total;
+  //   }
+
+  //   return total;
+  // }
 
 
 

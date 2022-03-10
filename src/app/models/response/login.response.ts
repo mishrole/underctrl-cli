@@ -7,6 +7,7 @@ export class LoginResponse {
     firstname?: string;
     lastname?: string;
     roles: any;
+    id: number;
     expires_in?: number;
     jti?: string;
     scope?: string;

@@ -9,8 +9,9 @@ import { NgxSpinnerModule } from 'ngx-spinner';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { RecaptchaFormsModule, RecaptchaModule } from 'ng-recaptcha';
 import { WebcamModule } from 'ngx-webcam';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { TokenInterceptorService } from './core/interceptors/token-interceptor.service';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,13 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     NgbModule,
     WebcamModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptorService,
+      multi: true
+    }
+  ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   bootstrap: [AppComponent]
 })

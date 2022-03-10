@@ -1,0 +1,21 @@
+.card {
+	background-color: var(--background-color-dark-full);
+	border: 1px solid var(--secondary-color-dark-full);
+	color: var(--white-color-dark-text);
+}
+
+.card:hover {
+	cursor: pointer;
+}
+
+.card-footer {
+	border-top: 1px solid var(--secondary-color-dark-full);
+}
+
+.spending:nth-child(even) {
+	border-left: 1px solid var(--secondary-color-dark-full);
+}
+
+.spending:nth-child(odd) {
+	border-right: 1px solid var(--secondary-color-dark-full);
+}

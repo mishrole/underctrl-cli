@@ -87,6 +87,7 @@ export class LoginComponent implements OnInit {
           
           user.roles = roles;
 
+          user.id = res?.id;
           user.firstname = res?.firstname ||'';
           user.lastname = res?.lastname || '';
           user.email = res?.email || '';

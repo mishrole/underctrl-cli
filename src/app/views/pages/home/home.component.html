@@ -2,3 +2,36 @@
     <h3>Welcome <span>{{user.firstname + ' ' + user.lastname}}</span></h3>
 </div> -->
 
+<div class="container py-4">
+    <div class="row">
+        <div class="col-12" *ngFor="let account of accounts; let i=index;">
+            <div class="card">
+                <div class="card-body">
+                    <h5><i class='bx bx-wallet'></i> {{account.name}}</h5>
+                    <h2>{{account.currency.iso}} {{account.total}}</h2>
+                </div>
+                <div class="card-footer">
+                    <div class="row">
+                        <div class="col-6 spending">
+                            <div class="d-flex flex-column justify-content-center align-items-start">
+                                <div class="py-1">
+                                    <p class="m-0"><i class='bx bxs-up-arrow'></i> Income</p>
+                                    <p class="m-0">{{account.income}} {{account.currency.iso}}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6 spending">
+                            <div class="d-flex flex-column justify-content-center align-items-end">
+                                <div class="py-1">
+                                    <p class="m-0"><i class='bx bxs-down-arrow'></i> Expenses</p>
+                                    <p class="m-0">{{account.expense}} {{account.currency.iso}}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -53,7 +53,8 @@ export class TokenInterceptorService implements HttpInterceptor {
               }
               
               user.roles = roles;
-    
+              
+              user.id = res?.id;
               user.firstname = res?.firstname ||'';
               user.lastname = res?.lastname || '';
               user.email = res?.email || '';
@@ -72,7 +73,7 @@ export class TokenInterceptorService implements HttpInterceptor {
               return next.handle(req);
             }),
             catchError((error: HttpErrorResponse) => {
-              console.warn('Token refrsh error: ', error);
+              console.warn('Token refresh error: ', error);
               this.authService.logout();
               const session = this.authService.getSession();
               if (!session) {

@@ -1,7 +1,105 @@
 <header></header>
 
-<div class="container">
+<nav class="navbar navbar-dark bg-dark fixed-top">
+    <div class="container-fluid">
+        <div class="d-flex gap-2">
+            <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
+                <i class='bx bx-menu'></i>
+            </button>
+            <!-- <a class="navbar-brand" href="#">Under <span class="text-primary fw-bold">CTRL</span> {{route | uppercase }}</a> -->
+            <span class="navbar-brand">{{route | titlecase }}</span>
+        </div>
+        <!-- <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
+            <span class="navbar-toggler-icon"></span>
+        </button> -->
+        <!-- <a class="navbar-brand" href="#">Test</a> -->
+
+        <!-- Sidemenu -->
+        <div class="offcanvas offcanvas-start offcanvas-bg-dark" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+            <div class="offcanvas-header bg-dark">
+                <div class="col-2 fs-1">
+                    <i class='bx bx-user'></i>
+                </div>
+                <div class="col-8">
+                    <p class="m-0">{{user.firstname}} {{user.lastname}}</p>
+                    <p class="m-0 text-subtext">Premium plan</p>
+                </div>
+                <div class="col-2 d-flex justify-content-end align-items-start">
+                    <button type="button" class="close-offcanvas text-reset text-subtext" data-bs-dismiss="offcanvas" aria-label="Close"><i class='bx bx-x' ></i></button>
+                </div>
+                <!-- <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Offcanvas</h5> -->
+                
+            </div>
+
+            <div class="offcanvas-body">
+                <ul class="navbar-nav justify-content-start flex-grow-1 pe-3">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Link</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="offcanvasNavbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Dropdown
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="offcanvasNavbarDropdown">
+                            <li><a class="dropdown-item" href="#">Action</a></li>
+                            <li><a class="dropdown-item" href="#">Another action</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="#">Something else here</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                <form class="d-flex">
+                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-success" type="submit">Search</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</nav>
+
+
+<div class="container mt-5">
+
     <router-outlet></router-outlet>
+
+    <!-- FAB Button -->
+    <div id="container-floating">
+        <div class="nd5 nds" data-original-title="Accounts" data-placement="left" data-toggle="tooltip">
+            <p class="letter"><a [href]="['/accounts/new']"><i class='bx bx-wallet'></i></a></p>
+            <div class="quick-term">Accounts</div>
+        </div>
+    
+        <div class="nd4 nds" data-original-title="Records" data-placement="left" data-toggle="tooltip">
+            <p class="letter"><a [href]="['/records/new']"><i class='bx bx-list-ul'></i></a></p>
+            <div class="quick-term">Records</div>
+        </div>
+    
+        <div class="nd3 nds" data-original-title="Categories" data-placement="left" data-toggle="tooltip">
+            <p class="letter"><a [href]="['/categories/new']" target="_blank"><i class='bx bx-category-alt'></i></a></p>
+            <div class="quick-term">Categories</div>
+        </div>
+    
+        <div class="nd1 nds" data-original-title="Contacts" data-placement="left" data-toggle="tooltip">
+            <p class="letter"><a [href]="['/contacts/new']"><i class='bx bxs-contact'></i></a></p>
+            <div class="quick-term">Contacts</div>
+        </div>
+    
+        <!-- <div data-original-title="Create" data-placement="left" data-toggle="tooltip" id="floating-button" onclick="newmail()">
+            <p class="plus">+</p>
+            <img class="edit" src="http://itagroup.hs.llnwd.net/o40/csg/pse-demo/arrow.png" />
+        </div> -->
+
+        <div data-original-title="Create" data-placement="left" data-toggle="tooltip" id="floating-button">
+            <p class="plus"><i class='bx bx-plus'></i></p>
+            <p class="edit"><i class='bx bx-up-arrow-alt' ></i></p>
+            <!-- <img class="edit" src="http://itagroup.hs.llnwd.net/o40/csg/pse-demo/arrow.png" /> -->
+        </div>
+    </div>
 </div>
 
 <footer></footer>
