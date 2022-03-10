@@ -46,39 +46,20 @@
             <div class="offcanvas-body">
                 <ul class="navbar-nav justify-content-start flex-grow-1 pe-3">
                     <li class="nav-item py-1" *ngFor="let menuItem of menu">
-                        <a [routerLink]="menuItem.url" class="nav-link" data-bs-dismiss="offcanvas">
-                            <i class="bx {{menuItem.icon}}"></i>
-                            <span class="ps-3">{{menuItem.name}}</span>
+                        <a [routerLink]="menuItem.url" class="nav-link d-flex align-items-center" data-bs-dismiss="offcanvas">
+                            <i class="bx {{menuItem.icon}} fs-3"></i>
+                            <span class="ps-4">{{menuItem.name}}</span>
                         </a>
-                        <!-- <div class="d-flex gap-3 align-items-center">
-                            <i class="bx {{menuItem.icon}}"></i>
-                            <a [routerLink]="menuItem.url" class="nav-link" data-bs-dismiss="offcanvas" >{{menuItem.name}}</a>
-                        </div> -->
                     </li>
-                    <!-- <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Link</a>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="offcanvasNavbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        Dropdown
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="offcanvasNavbarDropdown">
-                            <li><a class="dropdown-item" href="#">Action</a></li>
-                            <li><a class="dropdown-item" href="#">Another action</a></li>
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
-                            <li><a class="dropdown-item" href="#">Something else here</a></li>
-                        </ul>
-                    </li> -->
                 </ul>
-                <!-- <form class="d-flex">
-                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-success" type="submit">Search</button>
-                </form> -->
+            </div>
+
+            <div class="offcanvas-footer">
+                <div class="d-flex p-3">
+                    <a href="https://github.com/mishrole" class="text-subtext d-flex align-items-center" target="_blank">
+                        <i class='bx bxl-github fs-1'></i> <span class="ps-3">Designed & developed by <span class="fw-bold">mishrole</span></span>
+                    </a>
+                </div>
             </div>
         </div>
     </div>
