@@ -14,5 +14,10 @@ export const Constants = {
 	CATEGORY_OTHER: 7,
 
 	TYPE_INCOME: 1,
-	TYPE_EXPENSE: 2
+	TYPE_EXPENSE: 2,
+
+	GRANT_TYPE_TOKEN: 'password',
+	GRANT_TYPE_REFRESH: 'refresh_token',
+	API_USER: 'und3rctrl',
+	API_PWD: 'und3rctrlp4ss'
 }

@@ -1,15 +1,24 @@
 <div class="container">
 	<h1 class="brand"><a [routerLink]="['']">Under <span>CTRL</span></a></h1>
-	<form class="container px-5">
+	<form [formGroup]="loginFormGroup" (ngSubmit)="authenticate()" class="container px-5">
 
 		<div class="row align-items-center justify-content-center">
 			<div class="mb-3">
 				<label for="email" class="form-label">Email</label>
-				<input type="email" class="form-control" id="email">
+				<input type="email" class="form-control" id="email" formControlName="Email">
+				<div *ngIf="frmLogin['Email'].invalid && (frmLogin['Email'].dirty || frmLogin['Email'].touched)">
+					<span class="text-danger" *ngIf="frmLogin['Email'].hasError('required')">Email is required</span>
+					<span class="text-danger" *ngIf="frmLogin['Email'].hasError('email')">Email is invalid</span>
+				</div>
 			</div>
 			<div class="mb-3">
 				<label for="password" class="form-label">Password</label>
-				<input type="password" class="form-control" id="password">
+				<input type="password" class="form-control" id="password" formControlName="Password">
+				<div *ngIf="frmLogin['Password'].invalid && (frmLogin['Password'].dirty || frmLogin['Password'].touched)">
+					<span class="text-danger" *ngIf="frmLogin['Password'].hasError('required')">Password is required</span>
+					<span class="text-danger" *ngIf="frmLogin['Password'].hasError('minlength')">Password must have 8-128 characters long</span>
+					<span class="text-danger" *ngIf="frmLogin['Password'].hasError('maxlength')">Password must have 8-128 characters long</span>
+				</div>
 			</div>
 		</div>
 		

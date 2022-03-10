@@ -3,11 +3,20 @@ import { LayoutModule } from './views/layout/layout.module';
 import { SharedModule } from './views/pages/shared/shared.module';
 import { RouterModule, Routes } from '@angular/router';
 import { ErrorPageComponent } from './views/pages/shared/error-page/error-page.component';
+import { LayoutBaseComponent } from './views/layout/layout-base/layout-base.component';
+import { AuthGuard } from './core/auth.guard';
 
 const routes: Routes = [
   { path: '', redirectTo: 'auth', pathMatch: 'full' },
   { path: 'auth', loadChildren: () => import('./views/pages/auth/auth.module').then(m => m.AuthModule) },
-    
+  
+  {
+    path: '', component: LayoutBaseComponent, canActivate: [AuthGuard],
+    children: [
+      { path: 'home', loadChildren: () => import('./views/pages/home/home.module').then(m => m.HomeModule), canActivate: [AuthGuard] }
+    ]
+  },
+
   {
     path: 'error', component: ErrorPageComponent, data: {
       type: 404,
