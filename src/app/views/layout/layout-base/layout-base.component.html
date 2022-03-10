@@ -7,7 +7,19 @@
                 <i class='bx bx-menu'></i>
             </button>
             <!-- <a class="navbar-brand" href="#">Under <span class="text-primary fw-bold">CTRL</span> {{route | uppercase }}</a> -->
-            <span class="navbar-brand">{{route | titlecase }}</span>
+            <!-- <span class="navbar-brand">
+                <span *ngFor="let route of routes; let i = index;">
+                    <span *ngIf="i == 0">
+                        {{route | titlecase }}
+                    </span>
+                    <span *ngIf="i > 0">
+                        / {{route | titlecase }}
+                    </span>
+                </span>
+            </span> -->
+            <a class="navbar-brand" [routerLink]="['/home']">
+                Under <span class="text-primary fw-bold">CTRL</span> 
+            </a>
         </div>
         <!-- <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
             <span class="navbar-toggler-icon"></span>
@@ -33,7 +45,17 @@
 
             <div class="offcanvas-body">
                 <ul class="navbar-nav justify-content-start flex-grow-1 pe-3">
-                    <li class="nav-item">
+                    <li class="nav-item py-1" *ngFor="let menuItem of menu">
+                        <a [routerLink]="menuItem.url" class="nav-link" data-bs-dismiss="offcanvas">
+                            <i class="bx {{menuItem.icon}}"></i>
+                            <span class="ps-3">{{menuItem.name}}</span>
+                        </a>
+                        <!-- <div class="d-flex gap-3 align-items-center">
+                            <i class="bx {{menuItem.icon}}"></i>
+                            <a [routerLink]="menuItem.url" class="nav-link" data-bs-dismiss="offcanvas" >{{menuItem.name}}</a>
+                        </div> -->
+                    </li>
+                    <!-- <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="#">Home</a>
                     </li>
                     <li class="nav-item">
@@ -51,12 +73,12 @@
                             </li>
                             <li><a class="dropdown-item" href="#">Something else here</a></li>
                         </ul>
-                    </li>
+                    </li> -->
                 </ul>
-                <form class="d-flex">
+                <!-- <form class="d-flex">
                     <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
                     <button class="btn btn-outline-success" type="submit">Search</button>
-                </form>
+                </form> -->
             </div>
         </div>
     </div>
@@ -69,25 +91,33 @@
 
     <!-- FAB Button -->
     <div id="container-floating">
-        <div class="nd5 nds" data-original-title="Accounts" data-placement="left" data-toggle="tooltip">
-            <p class="letter"><a [href]="['/accounts/new']"><i class='bx bx-wallet'></i></a></p>
-            <div class="quick-term">Accounts</div>
-        </div>
-    
-        <div class="nd4 nds" data-original-title="Records" data-placement="left" data-toggle="tooltip">
-            <p class="letter"><a [href]="['/records/new']"><i class='bx bx-list-ul'></i></a></p>
-            <div class="quick-term">Records</div>
-        </div>
-    
-        <div class="nd3 nds" data-original-title="Categories" data-placement="left" data-toggle="tooltip">
-            <p class="letter"><a [href]="['/categories/new']" target="_blank"><i class='bx bx-category-alt'></i></a></p>
-            <div class="quick-term">Categories</div>
-        </div>
-    
-        <div class="nd1 nds" data-original-title="Contacts" data-placement="left" data-toggle="tooltip">
-            <p class="letter"><a [href]="['/contacts/new']"><i class='bx bxs-contact'></i></a></p>
-            <div class="quick-term">Contacts</div>
-        </div>
+        <a [routerLink]="['/accounts/new']">
+            <div class="nd5 nds" data-original-title="Accounts" data-placement="left" data-toggle="tooltip">
+                <p class="letter"><i class='bx bx-wallet'></i></p>
+                <div class="quick-term">Accounts</div>
+            </div>
+        </a>
+        
+        <a [routerLink]="['/records/new']">
+            <div class="nd4 nds" data-original-title="Records" data-placement="left" data-toggle="tooltip">
+                <p class="letter"><i class='bx bx-list-ul'></i></p>
+                <div class="quick-term">Records</div>
+            </div>
+        </a>
+
+        <a [routerLink]="['/categories/new']" target="_blank">
+            <div class="nd3 nds" data-original-title="Categories" data-placement="left" data-toggle="tooltip">
+                <p class="letter"><i class='bx bx-category-alt'></i></p>
+                <div class="quick-term">Categories</div>
+            </div>
+        </a>
+
+        <a [routerLink]="['/contacts/new']">
+            <div class="nd1 nds" data-original-title="Contacts" data-placement="left" data-toggle="tooltip">
+                <p class="letter"><i class='bx bxs-contact'></i></p>
+                <div class="quick-term">Contacts</div>
+            </div>
+        </a>
     
         <!-- <div data-original-title="Create" data-placement="left" data-toggle="tooltip" id="floating-button" onclick="newmail()">
             <p class="plus">+</p>

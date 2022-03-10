@@ -13,7 +13,9 @@ const routes: Routes = [
   {
     path: '', component: LayoutBaseComponent, canActivate: [AuthGuard],
     children: [
-      { path: 'home', loadChildren: () => import('./views/pages/home/home.module').then(m => m.HomeModule), canActivate: [AuthGuard] }
+      { path: 'home', loadChildren: () => import('./views/pages/home/home.module').then(m => m.HomeModule), canActivate: [AuthGuard] },
+      { path: 'accounts', loadChildren: () => import('./views/pages/accounts/accounts.module').then(m => m.AccountsModule), canActivate: [AuthGuard]},
+      { path: '', redirectTo: 'home', pathMatch: 'full'}
     ]
   },
 

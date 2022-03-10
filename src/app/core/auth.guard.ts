@@ -15,7 +15,6 @@ export class AuthGuard implements CanActivate {
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
 
     const session = this.authService.getSession();
-    console.warn(session);
     const menuItems = this.authService.loadMenuItems(session?.user);
     const hasAccessTo = (url: any) => menuItems?.find(menuAccess => url.includes(menuAccess.url));
 

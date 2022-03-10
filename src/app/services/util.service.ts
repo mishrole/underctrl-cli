@@ -9,7 +9,18 @@ const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/js
 
 export class UtilService {
 
+  breadcrum: string;
+
   constructor(private http: HttpClient) { }
+
+  getBreadcrum(): string {
+    return this.breadcrum;
+  }
+
+  setBreadcrum(breadcrum: string): void {
+    this.breadcrum = breadcrum;
+  }
+  
 
   success(message: string): void {
     Swal.fire({

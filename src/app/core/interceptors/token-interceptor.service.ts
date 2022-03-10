@@ -39,6 +39,8 @@ export class TokenInterceptorService implements HttpInterceptor {
           refreshTokenRequest.grant_type = Constants.GRANT_TYPE_REFRESH;
           refreshTokenRequest.refresh_token = session?.refresh_token || '';
 
+          console.log('token interceptor', refreshTokenRequest);
+
           return this.authService.refreshToken(refreshTokenRequest).pipe(
             concatMap((res: any) => {
               const user = new User();

@@ -12,6 +12,7 @@ import { WebcamModule } from 'ngx-webcam';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TokenInterceptorService } from './core/interceptors/token-interceptor.service';
+import { DataService } from './services/data.service';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { TokenInterceptorService } from './core/interceptors/token-interceptor.s
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptorService,
       multi: true
-    }
+    },
+    DataService
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   bootstrap: [AppComponent]

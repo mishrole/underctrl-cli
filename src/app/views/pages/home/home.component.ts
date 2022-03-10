@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Account } from 'src/app/models/account';
 import { AccountService } from 'src/app/services/account.service';
 import { AuthenticationService } from 'src/app/services/authentication.service';
+import { DataService } from 'src/app/services/data.service';
 import { UtilService } from 'src/app/services/util.service';
 
 
@@ -11,7 +12,7 @@ import { UtilService } from 'src/app/services/util.service';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit, AfterViewInit {
 
   user: any;
   balance: number;
@@ -21,13 +22,18 @@ export class HomeComponent implements OnInit {
     private authService: AuthenticationService,
     private accountService: AccountService,
     private spinner: NgxSpinnerService,
-    private util: UtilService,
+    private utilService: UtilService,
+    private dataService: DataService
   ) { }
+
+  ngAfterViewInit(): void {
+    this.dataService.setOption('breadcrum', 'Home');
+  }
 
   ngOnInit(): void {
     if (sessionStorage.getItem('auth') != null) {
       const res = JSON.parse(sessionStorage.getItem('auth') || '{}');
-      console.log('RES', res);
+      // console.log('RES', res);
       this.user = res.user;
     }
 
@@ -39,12 +45,12 @@ export class HomeComponent implements OnInit {
     this.spinner.show();
 
     this.accountService.allAccountsByOwner(this.user.id).subscribe(res => {
-      console.log('allAccountsByOwner', res.data);
+      // console.log('allAccountsByOwner', res.data);
       this.accounts = res.data;
       // this.balance = this.calculateTotalBalance();
     }, err => {
       console.warn(err);
-      this.util.error("", err?.detail);
+      this.utilService.error("", err?.detail);
       this.spinner.hide();
     }, () => {
       this.spinner.hide(); 
