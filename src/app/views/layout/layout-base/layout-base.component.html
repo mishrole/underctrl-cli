@@ -28,14 +28,17 @@
 
         <!-- Sidemenu -->
         <div class="offcanvas offcanvas-start offcanvas-bg-dark" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
-            <div class="offcanvas-header bg-dark">
-                <div class="col-2 fs-1">
-                    <i class='bx bx-user'></i>
+            <div class="offcanvas-header bg-dark py-5" [routerLink]="['/users/', user.id]">
+                <div class="col-10 d-flex profile-header">
+                    <div class="col-2 fs-1">
+                        <i class='bx bx-user'></i>
+                    </div>
+                    <div class="col-10">
+                        <p class="m-0">{{user.firstname}} {{user.lastname}}</p>
+                        <p class="m-0 text-subtext">Premium plan</p>
+                    </div>
                 </div>
-                <div class="col-8">
-                    <p class="m-0">{{user.firstname}} {{user.lastname}}</p>
-                    <p class="m-0 text-subtext">Premium plan</p>
-                </div>
+                
                 <div class="col-2 d-flex justify-content-end align-items-start">
                     <button type="button" class="close-offcanvas text-reset text-subtext" data-bs-dismiss="offcanvas" aria-label="Close"><i class='bx bx-x' ></i></button>
                 </div>
@@ -54,13 +57,13 @@
                 </ul>
             </div>
 
-            <div class="offcanvas-footer">
-                <div class="d-flex p-3">
-                    <a href="https://github.com/mishrole" class="text-subtext d-flex align-items-center" target="_blank">
-                        <i class='bx bxl-github fs-1'></i> <span class="ps-3">Designed & developed by <span class="fw-bold">mishrole</span></span>
-                    </a>
-                </div>
-            </div>
+            <a href="https://github.com/mishrole" class="offcanvas-footer d-flex p-3 text-subtext d-flex align-items-center" target="_blank">
+                <i class='bx bxl-github fs-1'></i> <span class="ps-3">Designed & developed by <span class="fw-bold">mishrole</span></span>
+            </a>
+
+            <a href="" (click)="logOut($event)" class="offcanvas-footer d-flex p-3 text-danger d-flex align-items-center">
+                <i class='bx bx-log-out fs-4' id="log_out"></i><span class="ps-3">Log Out</span>
+            </a>
         </div>
     </div>
 </nav>

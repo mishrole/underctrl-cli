@@ -6,6 +6,10 @@
     background-color: var(--background-color-dark-full);
 }
 
+.profile-header:hover {
+    cursor: pointer;
+}
+
 a {
     text-decoration: none;
 }
@@ -37,6 +41,10 @@ a {
 
 .text-primary {
     color: var(--primary-color-dark-full) !important;
+}
+
+.text-danger {
+    color: var(--danger-color-dark-full) !important;
 }
 
 .navbar-brand {

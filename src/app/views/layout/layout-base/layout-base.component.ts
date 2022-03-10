@@ -47,4 +47,10 @@ export class LayoutBaseComponent implements OnInit {
     this.menu = this.authenticationService.loadMenuItems(this.user);
   }
 
+  logOut(event: any): void {
+    event.preventDefault();
+    this.authenticationService.logout();
+    this.router.navigate(['/auth']);
+  }
+
 }
