@@ -50,7 +50,7 @@ export class TokenInterceptorService implements HttpInterceptor {
 
           return this.handle401Error(authReq, next);
         } else {
-          return throwError(new Error("Unexpected error"));
+          return throwError(error);
         }
       })
     );

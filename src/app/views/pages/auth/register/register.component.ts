@@ -82,17 +82,6 @@ export class RegisterComponent implements OnInit {
 
       this.spinner.show();
 
-      // this.userService.register(user).subscribe(res => {
-
-      // }, err => {
-      //     console.warn(err);
-      //     this.utilService.error("", err?.error.error_description);
-      //     this.spinner.hide();
-      //   }, () => {
-      //     this.spinner.hide(); 
-      //   }
-      // );
-
       this.userService.register(user).pipe(
         concatMap(() => this.authService.oauth(new LoginRequest(user.email, user.password, Constants.GRANT_TYPE_TOKEN)))
       ).subscribe(res => {
