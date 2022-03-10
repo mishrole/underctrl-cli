@@ -50,7 +50,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
       // this.balance = this.calculateTotalBalance();
     }, err => {
       console.warn(err);
-      this.utilService.error("", err?.detail);
+      this.utilService.error("", err || err?.detail);
       this.spinner.hide();
     }, () => {
       this.spinner.hide(); 
