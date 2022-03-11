@@ -4,6 +4,7 @@ import { AccountsAddComponent } from './accounts-add/accounts-add.component';
 import { RouterModule, Routes } from '@angular/router';
 import { AccountsComponent } from './accounts.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AccountsDetailsComponent } from './accounts-details/accounts-details.component';
 
 const routes: Routes = [
   {
@@ -11,7 +12,11 @@ const routes: Routes = [
     children: [
       {
         path: 'new', component: AccountsAddComponent
-      }
+      },
+      {
+        path: 'detail/:id',
+        component: AccountsDetailsComponent
+      },
     ]
   }
 ];
@@ -20,6 +25,7 @@ const routes: Routes = [
   declarations: [
     AccountsComponent,
     AccountsAddComponent,
+    AccountsDetailsComponent,
   ],
   imports: [
     CommonModule,

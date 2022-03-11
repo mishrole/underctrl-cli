@@ -31,6 +31,7 @@ export class AccountsAddComponent implements OnInit, AfterViewInit {
     private authService: AuthenticationService,
     private currencyService: CurrencyService,
     private accountService: AccountService,
+    private dataService: DataService
   ) { }
 
   get frmAccount(): any { return this.accountFormGroup.controls; }
@@ -62,13 +63,12 @@ export class AccountsAddComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    // this.dataService.setOption('breadcrum','Accounts / New');
+    this.dataService.setOption('breadcrum','New Account');
   }
 
   ngOnInit(): void {
     this.createAccountForm();
     this.getCurrencies();
-    // this.dataService.setOption('breadcrum','Accounts / New');
   }
 
   saveAccount(): void {

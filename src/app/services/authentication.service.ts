@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
@@ -39,6 +39,40 @@ export class AuthenticationService {
 
     return httpOptions;
   }
+
+  getHttpOptionsWithParams(contentType: string, filter: any): object {
+    let token = this.getSession()?.access_token;
+
+    let params = new HttpParams();
+
+    for (const key in filter) {
+      if ((filter[key] !== undefined) && (filter[key] !== null)) {
+        params = params.append(key.toString(), filter[key]);
+      }
+    }
+
+    let httpOptions = { 
+      headers: new HttpHeaders({
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': contentType
+      }),
+      params: params
+    };
+
+    return httpOptions;
+  }
+
+  // getHttpParams(filter: any): object {
+  //   let params = new HttpParams();
+
+  //   for (const key in filter) {
+  //     if ((filter[key] !== undefined) && (filter[key] !== null)) {
+  //       params = params.append(key.toString(), filter[key]);
+  //     }
+  //   }
+
+  //   return params;
+  // }
 
   oauth(loginRequest: LoginRequest): Observable<LoginResponse> {
 

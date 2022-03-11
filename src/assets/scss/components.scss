@@ -1,3 +1,12 @@
+.list-group-item {
+	border-color: var(--secondary-color-dark-full) !important;
+	background-color: var(--background-color-dark-full) !important;
+	color: var(--white-color-dark-text) !important;
+
+	padding-left: 0;
+	padding-right: 0;
+}
+
 .form-label {
 	color: var(--accent-color-dark-text) !important;
 }
@@ -43,4 +52,8 @@
 
 .text-danger {
 	color: var(--danger-color-dark-full) !important;
+}
+
+.text-success {
+	color: var(--primary-color-dark-full) !important;
 }

@@ -1,0 +1,29 @@
+<div class="container py-2">
+	<ul class="list-group list-group-flush py-2" *ngIf="account && records">
+		<li class="list-group-item" *ngFor="let record of records">
+			<div class="row">
+				<div class="col-1">
+					<span class="rounded-circle">
+						<i class='bx bx-list-ul'></i>
+					</span>
+				</div>
+				<div class="col-6">
+					<div class="d-flex flex-column">
+						<span>{{record.name}}</span>
+						<span>{{record.concept}}</span>
+						<div>
+							<span class="badge rounded-pill bg-secondary">{{record.category.name}}</span>
+						</div>
+					</div>
+				</div>
+				<div class="col-5">
+					<div class="d-flex flex-column text-end">
+						<span *ngIf="record.type.id === CONSTANT_TYPE_EXPENSE" class="text-danger">- {{account.currency.iso}} {{record.amount}}</span>
+						<span *ngIf="record.type.id === CONSTANT_TYPE_INCOME" class="text-success">+ {{account.currency.iso}} {{record.amount}}</span>
+						<p>{{record.recordDate | date}}</p>
+					</div>
+				</div>
+			</div>
+		</li>
+	</ul>
+</div>

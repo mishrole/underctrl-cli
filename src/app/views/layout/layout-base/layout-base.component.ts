@@ -13,7 +13,8 @@ import { UtilService } from 'src/app/services/util.service';
 })
 export class LayoutBaseComponent implements OnInit {
   
-  // breadcrum: any = 'Under Ctrl';
+  breadcrum: any = 'Under CTRL';
+  search: boolean = false;
   user: any;
 
   menu: MenuItem[];
@@ -29,11 +30,12 @@ export class LayoutBaseComponent implements OnInit {
   ngOnInit(): void {
     // It works but not as expected, routerlink doesn't change path so title remains as 'Home'
 
-    // this.dataService.subject.subscribe((res: any) => {
-    //   this.breadcrum = res.breadcrum;
-    //   // Avoid error NG0100
-    //   this.changeDetectorRef.detectChanges();
-    // });
+    this.dataService.subject.subscribe((res: any) => {
+      this.breadcrum = res.breadcrum;
+      this.search = res.search;
+      // Avoid error NG0100
+      this.changeDetectorRef.detectChanges();
+    });
 
     if (sessionStorage.getItem('auth') != null) {
       const res = JSON.parse(sessionStorage.getItem('auth') || '{}');

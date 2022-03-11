@@ -6,25 +6,8 @@
             <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
                 <i class='bx bx-menu'></i>
             </button>
-            <!-- <a class="navbar-brand" href="#">Under <span class="text-primary fw-bold">CTRL</span> {{route | uppercase }}</a> -->
-            <!-- <span class="navbar-brand">
-                <span *ngFor="let route of routes; let i = index;">
-                    <span *ngIf="i == 0">
-                        {{route | titlecase }}
-                    </span>
-                    <span *ngIf="i > 0">
-                        / {{route | titlecase }}
-                    </span>
-                </span>
-            </span> -->
-            <a class="navbar-brand" [routerLink]="['/home']">
-                Under <span class="text-primary fw-bold">CTRL</span> 
-            </a>
+            <span class="navbar-brand">{{breadcrum}}</span>
         </div>
-        <!-- <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
-            <span class="navbar-toggler-icon"></span>
-        </button> -->
-        <!-- <a class="navbar-brand" href="#">Test</a> -->
 
         <!-- Sidemenu -->
         <div class="offcanvas offcanvas-start offcanvas-bg-dark" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
@@ -69,8 +52,18 @@
     </div>
 </nav>
 
+<div class="container pt-4 mt-5">
+    <div class="row">
+        <div class="searchbar">
+            <form>
+                <input type="text" class="form-control" id="keyword" placeholder="Name, concept, or category">
+            </form>
+        </div>
+    </div>
+</div>
 
-<div class="container mt-5">
+
+<div class="container mt-2">
 
     <router-outlet></router-outlet>
 

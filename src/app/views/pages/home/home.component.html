@@ -1,7 +1,7 @@
 <div class="container py-4">
     <div class="row">
         <div class="col-12 py-2" *ngFor="let account of accounts">
-            <div class="card" [routerLink]="['/accounts/', account.id]">
+            <div class="card" [routerLink]="['/accounts/detail', account.id]">
                 <div class="card-body">
                     <h5><i class='bx bx-wallet'></i> {{account.name}}</h5>
                     <h2>{{account.currency.iso}} {{account.total}}</h2>
