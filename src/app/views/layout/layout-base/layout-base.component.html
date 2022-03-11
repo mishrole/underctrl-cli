@@ -28,8 +28,8 @@
 
         <!-- Sidemenu -->
         <div class="offcanvas offcanvas-start offcanvas-bg-dark" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
-            <div class="offcanvas-header bg-dark py-5" [routerLink]="['/users/', user.id]">
-                <div class="col-10 d-flex profile-header">
+            <div class="offcanvas-header bg-dark py-5">
+                <div class="col-10 d-flex profile-header" [routerLink]="['/profile']">
                     <div class="col-2 fs-1">
                         <i class='bx bx-user'></i>
                     </div>
@@ -61,8 +61,9 @@
                 <i class='bx bxl-github fs-1'></i> <span class="ps-3">Designed & developed by <span class="fw-bold">mishrole</span></span>
             </a>
 
-            <a href="" (click)="logOut($event)" class="offcanvas-footer d-flex p-3 text-danger d-flex align-items-center">
-                <i class='bx bx-log-out fs-4' id="log_out"></i><span class="ps-3">Log Out</span>
+            <a href="" (click)="logOut($event)" class="offcanvas-footer d-flex p-3 text-danger d-flex align-items-center justify-content-between">
+                <span>Log Out</span>
+                <i class='bx bx-log-out fs-4' id="log_out"></i>
             </a>
         </div>
     </div>

@@ -13,6 +13,7 @@
 
     --primary-color-dark-full: #38b2ac;
     --primary-color-dark-bg: rgba(49, 151, 149, 0.7);
+    --primary-color-dark-bg-active: rgba(49, 151, 149, 0.6);
     --primary-color-dark-text: #e6fffa;
     --primary-color-dark-bg-soft: rgba(129, 230, 217, 0.7);
 
@@ -42,10 +43,12 @@
 html,
 body {
     position: relative;
-    min-height: 100vh;
-    width: 100%;
+    // min-height: 100vh;
+    // width: 100%;
     // overflow: hidden;
+    padding: 0 !important;
     overflow: auto;
+    background-color: var(--background-color-dark-full);
 }
 
 .text-muted {

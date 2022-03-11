@@ -128,7 +128,7 @@
   },
   "schematics": {
     "@schematics/angular:component": {
-      "styleExt": "scss"
+      "style": "scss"
     }
   },
   "defaultProject": "undercontrol"

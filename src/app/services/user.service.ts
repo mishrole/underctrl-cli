@@ -16,15 +16,15 @@ export class UserService {
     private http: HttpClient
   ) { }
 
-  register(user: User): Observable<BaseResponse<User>> {
-    return this.http.post<BaseResponse<User>>(`${environment.api}/api/v1/users/register`, user, this.httpOptions);
+  register(user: User): Observable<BaseResponse<any>> {
+    return this.http.post<BaseResponse<any>>(`${environment.api}/api/v1/users/register`, user, this.httpOptions);
   }
 
-  update(id: number, user: User): Observable<BaseResponse<User>> {
-    return this.http.put<BaseResponse<User>>(`${environment.api}/api/v1/users/${id}`, user, this.httpOptions);
+  update(id: number, user: User): Observable<BaseResponse<any>> {
+    return this.http.put<BaseResponse<any>>(`${environment.api}/api/v1/users/${id}`, user, this.httpOptions);
   }
 
-  findById(id: number): Observable<BaseResponse<User>> {
-    return this.http.get<BaseResponse<User>>(`${environment.api}/api/v1/users/${id}`);
+  findById(id: number): Observable<BaseResponse<any>> {
+    return this.http.get<BaseResponse<any>>(`${environment.api}/api/v1/users/${id}`);
   }
 }

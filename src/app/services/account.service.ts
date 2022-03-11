@@ -17,13 +17,17 @@ export class AccountService {
     private authService: AuthenticationService,
   ) { }
 
-  token = this.authService.getSession()?.access_token;
+  // token = this.authService.getSession()?.access_token;
   
   allAccountsByOwner(id: number): Observable<BaseResponse<any>> {
-    let headers = new HttpHeaders({
-      'Authorization': `Bearer ${this.token}`
-    });
+    // let headers = new HttpHeaders({
+    //   'Authorization': `Bearer ${this.token}`
+    // });
 
-    return this.http.get<any>(`${environment.api}/api/v1/accounts/owner/${id}`, {headers: headers});
+    return this.http.get<any>(`${environment.api}/api/v1/accounts/owner/${id}`, {headers: this.authService.getHeaderBearerToken()});
+  }
+
+  save(account: any): Observable<BaseResponse<any>> {
+    return this.http.post<any>(`${environment.api}/api/v1/accounts/`, account, this.authService.getHttpOptions('application/json'));
   }
 }

@@ -19,6 +19,27 @@ export class AuthenticationService {
     private http: HttpClient
   ) { }
 
+  getHeaderBearerToken(): HttpHeaders {
+    let token = this.getSession()?.access_token;
+    let headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+
+    return headers;
+  }
+
+  getHttpOptions(contentType: string): object {
+    let token = this.getSession()?.access_token;
+    let httpOptions = { 
+      headers: new HttpHeaders({
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': contentType
+      })
+    };
+
+    return httpOptions;
+  }
+
   oauth(loginRequest: LoginRequest): Observable<LoginResponse> {
 
     const params = new URLSearchParams();

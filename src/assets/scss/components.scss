@@ -1,0 +1,46 @@
+.form-label {
+	color: var(--accent-color-dark-text) !important;
+}
+
+.form-control, .form-select {
+	background-color: var(--background-color-dark-soft) !important;
+	border: 1px solid var(--secondary-color-dark-full) !important;
+	color: var(--white-color-dark-text) !important;
+
+	&:focus {
+		box-shadow: 0 0 0 0.10rem var(--primary-color-dark-bg-active);
+	}
+}
+
+.form-select {
+	background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABUAAAAVCAYAAACpF6WWAAAAAXNSR0IArs4c6QAAAKtJREFUOE/t09ENwjAMRdH7JoARGIER2AQYgY1gg25AR2ETo0qpVBIndRFFQqLfzqntl4gVPq1g8kc/v9Xv7dTM9sBR0qU2R6um6DQV34EtcJV0zuG5mhraA5uEvcAZOJTcJJ2mP3Z3mg4WcAQc8GpQDtwBh7QWt8Ox22b6DjyeK0aeHX9a4MBNsDl+Be7yULwrF778ZraT9Ii8vzAawUJBLYEWBfUO/DvjPwEWGT8Wf41+8wAAAABJRU5ErkJggg==");
+	background-size: 18px 16px;
+}
+
+.btn.btn-primary {
+	background-color: var(--primary-color-dark-bg);
+	border-color: var(--primary-color-dark-bg);
+	color: var(--primary-color-dark-text);
+
+	&:hover, &:active, &:focus, &:visited {
+		background-color: var(--primary-color-dark-bg-active);
+		border-color: var(--primary-color-dark-bg-active);
+	}
+
+	&:focus {
+		box-shadow: 0 0 0 0.10rem var(--primary-color-dark-bg-active);
+	}
+}
+
+.link-primary {
+	color: var(--primary-color-dark-bg-soft) !important;
+	text-decoration: none;
+}
+
+.text-white {
+	color: var(--white-color-dark-text) !important;
+}
+
+.text-danger {
+	color: var(--danger-color-dark-full) !important;
+}
