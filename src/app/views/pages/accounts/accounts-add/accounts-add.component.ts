@@ -22,7 +22,6 @@ export class AccountsAddComponent implements OnInit, AfterViewInit {
   accountFormGroup!: FormGroup;
 
   constructor(
-    // private dataService: DataService
     private router: Router,
     private userService: UserService,
     private spinner: NgxSpinnerService,
@@ -53,9 +52,9 @@ export class AccountsAddComponent implements OnInit, AfterViewInit {
     this.currencyService.allCurrencies().subscribe(res => {
       this.currencies = res.data;
     }, err => {
-      console.warn(err);
-      this.utilService.error("", err || err?.detail);
       this.spinner.hide();
+      console.warn(err);
+      this.utilService.errorHTML("", this.utilService.generateErrorMessage(err));
     }, () => {
       this.spinner.hide(); 
       }
@@ -93,7 +92,7 @@ export class AccountsAddComponent implements OnInit, AfterViewInit {
         }, err => {
           this.spinner.hide();
           console.warn(err);
-          this.utilService.error("", err?.error?.error_description);
+          this.utilService.errorHTML("", this.utilService.generateErrorMessage(err));
         }, () => this.spinner.hide()
       );
     } else {

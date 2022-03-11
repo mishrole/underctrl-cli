@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { concatMap } from 'rxjs/operators';
@@ -29,6 +29,8 @@ export class AccountsDetailsComponent implements OnInit {
   account: Account;
   records: Record[];
 
+  accountFormGroup!: FormGroup;
+
   constructor(
     private utilService: UtilService,
     private activatedRoute: ActivatedRoute,
@@ -40,6 +42,8 @@ export class AccountsDetailsComponent implements OnInit {
     private recordService: RecordService
   ) { }
 
+  get frmAccount(): any { return this.accountFormGroup.controls; }
+
   ngOnInit(): void {
     this.activatedRoute.params.subscribe(res => {
       this.accountId = res.id ?? null;
@@ -48,6 +52,8 @@ export class AccountsDetailsComponent implements OnInit {
     });
 
     this.dataService.setOption('search', true);
+
+    this.createAccountForm();
   }
 
   // TODO: ADD PIPE TO CALL BOTH 
@@ -62,7 +68,7 @@ export class AccountsDetailsComponent implements OnInit {
       }, err => {
         this.spinner.hide();
         console.warn(err);
-        this.utilService.error("", err?.error?.error_description);
+        this.utilService.errorHTML("", this.utilService.generateErrorMessage(err));
       }, () => this.spinner.hide()
     );
   }
@@ -75,9 +81,34 @@ export class AccountsDetailsComponent implements OnInit {
       }, err => {
         this.spinner.hide();
         console.warn(err);
-        this.utilService.error("", err?.error?.error_description);
+        this.utilService.errorHTML("", this.utilService.generateErrorMessage(err));
       }, () => this.spinner.hide()
     );
+  }
+
+  filterRecords(): void {
+    this.utilService.markFormTouched(this.accountFormGroup);
+
+    if (this.accountFormGroup.valid) {
+      this.filter.keyword = this.frmAccount.Keyword.value.trim();
+      
+      this.recordService.allRecordsByAccount(this.accountId, this.filter).subscribe(res => {
+        console.warn(res);
+        this.records = res.data;
+        }, err => {
+          this.spinner.hide();
+          console.warn(err);
+          this.utilService.errorHTML("", this.utilService.generateErrorMessage(err));
+        }, () => this.spinner.hide()
+      );
+
+    }
+  }
+
+  createAccountForm(): void {
+    this.accountFormGroup = this.formBuilder.group({
+      Keyword: ['']
+    })
   }
 
 

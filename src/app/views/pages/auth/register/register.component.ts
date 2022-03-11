@@ -114,7 +114,8 @@ export class RegisterComponent implements OnInit {
         err => {
           this.spinner.hide();
           console.warn(err);
-          this.utilService.error("", err?.error?.error_description);
+          // this.utilService.error("", err?.error?.error_description);
+          this.utilService.errorHTML("", this.utilService.generateErrorMessage(err));
         }, () => this.spinner.hide()
       );
 

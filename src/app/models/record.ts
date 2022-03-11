@@ -9,7 +9,7 @@ export class Record {
 	account: Account;
 	category: Category;
 	type: Type;
-	recordDate: Date;
+	recordDate: string;
 	createdAt: Date;
 	updatedAt: Date;
 	amount: number;

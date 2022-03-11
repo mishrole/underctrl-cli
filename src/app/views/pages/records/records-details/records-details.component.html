@@ -1,0 +1,44 @@
+<div class="container pt-4 mt-5" *ngIf="record">
+	<div class="card">
+		<div class="card-header">
+			<div class="d-flex justify-content-end align-items-center gap-3">
+				<a [routerLink]="['/records/', record.id, 'edit']" class="btn btn-primary">
+					<i class='bx bx-pencil'></i>
+				</a>
+				<a href="" (click)="delete($event)" class="btn btn-danger">
+					<i class='bx bx-trash-alt'></i>
+				</a>
+			</div>
+		</div>
+		<div class="card-body">
+			<div class="row p-2">
+				<div class="col-8">
+					<span class="form-label">Name</span>
+					<p>{{record.name}}</p>
+				</div>
+				<div class="col-4">
+					<span class="form-label">Date</span>
+					<p>{{record.recordDate | date}}</p>
+				</div>
+				<div class="col-4">
+					<span class="form-label">Category</span>
+					<p>{{record.category.name}}</p>
+				</div>
+				<div class="col-4">
+					<span class="form-label">Amount</span>
+					<p>{{record.amount}}</p>
+				</div>
+				<div class="col-4">
+					<span class="form-label">Type</span>
+					<p>{{record.type.name}}</p>
+				</div>
+				<div class="col-12">
+					<span class="form-label">Concept</span>
+					<p>{{record.concept}}</p>
+				</div>
+			</div>
+
+			
+		</div>
+	</div>
+</div>

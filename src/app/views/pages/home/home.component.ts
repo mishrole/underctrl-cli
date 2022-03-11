@@ -49,9 +49,9 @@ export class HomeComponent implements OnInit, AfterViewInit {
       this.accounts = res.data;
       // this.balance = this.calculateTotalBalance();
     }, err => {
-      console.warn(err);
-      this.utilService.error("", err || err?.detail);
       this.spinner.hide();
+      console.warn(err);
+      this.utilService.errorHTML("", this.utilService.generateErrorMessage(err));
     }, () => {
       this.spinner.hide(); 
       }

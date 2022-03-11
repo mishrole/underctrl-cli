@@ -1,0 +1,84 @@
+<div class="container py-4 mt-5">
+	<!-- <h3 class="px-4 py-3 text-white">New Account</h3> -->
+	<form [formGroup]="recordFormGroup" (ngSubmit)="saveRecord()" class="container px-4">
+		<div class="row align-items-center justify-content-center mb-3">
+			<div class="col-12 mb-3">
+				<label for="name" class="form-label">Name</label>
+				<input type="text" class="form-control" id="name" formControlName="Name">
+				<div *ngIf="frmRecord['Name'].invalid && (frmRecord['Name'].dirty || frmRecord['Name'].touched)">
+					<span class="text-danger" *ngIf="frmRecord['Name'].hasError('required')">Name is required</span>
+				</div>
+			</div>
+
+			<div class="col-12 mb-3">
+				<label for="concept" class="form-label">Concept</label>
+				<input type="text" class="form-control" id="concept" formControlName="Concept">
+				<div *ngIf="frmRecord['Concept'].invalid && (frmRecord['Concept'].dirty || frmRecord['Concept'].touched)">
+					<span class="text-danger" *ngIf="frmRecord['Concept'].hasError('required')">Concept is required</span>
+				</div>
+			</div>
+
+			<div class="col-12 mb-3">
+				<label for="recordDate" class="form-label">Date</label>
+				<input type="datetime-local" class="form-control" id="recordDate" max="{{today | date:'yyyy-MM-ddThh:mm:ss'}}" formControlName="RecordDate">
+				<div *ngIf="frmRecord['RecordDate'].invalid && (frmRecord['RecordDate'].dirty || frmRecord['RecordDate'].touched)">
+					<span class="text-danger" *ngIf="frmRecord['RecordDate'].hasError('required')">Date is required</span>
+				</div>
+			</div>
+
+			<div class="col-12 mb-3">
+				<label for="account" class="form-label">Account</label>
+				<select id="account" formControlName="Account" class="form-select">
+					<option selected value="">Select an account</option>
+					<option [value]="account.id" *ngFor="let account of accounts">
+						{{account.name}}
+					</option>
+				</select>
+				<div *ngIf="frmRecord['Account'].invalid && (frmRecord['Account'].dirty || frmRecord['Account'].touched)">
+					<span class="text-danger" *ngIf="frmRecord['Account'].hasError('required')">Account is required</span>
+				</div>
+			</div>
+
+			<div class="col-12 mb-3">
+				<label for="category" class="form-label">Category</label>
+				<select id="category" formControlName="Category" class="form-select">
+					<option selected value="">Select a category</option>
+					<option [value]="category.id" *ngFor="let category of categories">
+						{{category.name}}
+					</option>
+				</select>
+				<div *ngIf="frmRecord['Category'].invalid && (frmRecord['Category'].dirty || frmRecord['Category'].touched)">
+					<span class="text-danger" *ngIf="frmRecord['Category'].hasError('required')">Category is required</span>
+				</div>
+			</div>
+
+			<div class="col-6 mb-3">
+				<label for="amount" class="form-label">Amount</label>
+				<input type="number" class="form-control" id="amount" formControlName="Amount">
+				<div *ngIf="frmRecord['Amount'].invalid && (frmRecord['Amount'].dirty || frmRecord['Amount'].touched)">
+					<span class="text-danger" *ngIf="frmRecord['Amount'].hasError('required')">Amount is required</span>
+					<span class="text-danger" *ngIf="frmRecord['Amount'].hasError('min')">Amount must be greater or equals than 0</span>
+				</div>
+			</div>
+
+			<div class="col-6 mb-3">
+				<label for="type" class="form-label">Type</label>
+				<select id="type" formControlName="Type" class="form-select">
+					<option selected value="">Select a type</option>
+					<option [value]="type.id" *ngFor="let type of types">
+						{{type.name}}
+					</option>
+				</select>
+				<div *ngIf="frmRecord['Type'].invalid && (frmRecord['Type'].dirty || frmRecord['Type'].touched)">
+					<span class="text-danger" *ngIf="frmRecord['Type'].hasError('required')">Type is required</span>
+				</div>
+			</div>
+			
+		</div>
+
+		<div class="d-flex flex-column mb-5">
+			<button type="submit" class="btn btn-primary flex-fill">Create a Record</button>
+		</div>
+
+	</form>
+</div>

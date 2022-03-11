@@ -42,10 +42,10 @@ export class TokenInterceptorService implements HttpInterceptor {
       catchError((error: HttpErrorResponse) => {
         if (error && error.status === 401) {
           console.warn("ERROR, LOGOUT", error);
-          if (error.error.error_description.includes("Invalid refresh token")) {
+          if (error.error.error_description.includes("Invalid refresh token") || error.error.error.includes('invalid_token')) {
             this.authService.logout();
             this.router.navigate(['/auth']);
-            return throwError(new Error("Failed to refresh token"));
+            return throwError(new Error("Failed to refresh session token. Please sign in"));
           }
 
           return this.handle401Error(authReq, next);

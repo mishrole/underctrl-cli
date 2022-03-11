@@ -19,4 +19,21 @@ export class RecordService {
     let httpOptions = this.authService.getHttpOptionsWithParams('application/json', filter);
     return this.http.get<any>(`${environment.api}/api/v1/records/account/${id}/search`, httpOptions)
   }
+
+  save(record: any): Observable<BaseResponse<any>> {
+    return this.http.post<any>(`${environment.api}/api/v1/records/`, record, this.authService.getHttpOptions('application/json'));
+  }
+
+  getRecordById(id: number): Observable<BaseResponse<any>> {
+    return this.http.get<any>(`${environment.api}/api/v1/records/${id}`, {headers: this.authService.getHeaderBearerToken()});
+  }
+
+  update(id: number, record: any): Observable<BaseResponse<any>> {
+    return this.http.put<any>(`${environment.api}/api/v1/records/${id}`, record, this.authService.getHttpOptions('application/json'));
+  }
+
+  delete(id: number): Observable<BaseResponse<any>> {
+    return this.http.delete<any>(`${environment.api}/api/v1/records/${id}`, {headers: this.authService.getHeaderBearerToken()});
+  }
+  
 }

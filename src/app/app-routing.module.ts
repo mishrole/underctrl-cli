@@ -15,6 +15,7 @@ const routes: Routes = [
     children: [
       { path: 'home', loadChildren: () => import('./views/pages/home/home.module').then(m => m.HomeModule), canActivate: [AuthGuard] },
       { path: 'accounts', loadChildren: () => import('./views/pages/accounts/accounts.module').then(m => m.AccountsModule), canActivate: [AuthGuard]},
+      { path: 'records', loadChildren: () => import('./views/pages/records/records.module').then(m => m.RecordsModule), canActivate: [AuthGuard]},
       { path: '', redirectTo: 'home', pathMatch: 'full'}
     ]
   },
