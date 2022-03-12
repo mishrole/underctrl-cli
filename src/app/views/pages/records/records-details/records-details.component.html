@@ -1,6 +1,11 @@
 <div class="container pt-4 mt-5" *ngIf="record">
-	<div class="card">
-		<div class="card-header">
+	<!-- Back arrow -->
+	<div class="row pt-2 pb-3">
+		<div class="d-flex justify-content-between align-items-center">
+			<a [routerLink]="['/accounts', record.account.id, 'detail']" class="link-white d-flex align-items-center gap-2">
+				<i class='bx bx-arrow-back'></i>
+				<span>Back</span>
+			</a>
 			<div class="d-flex justify-content-end align-items-center gap-3">
 				<a [routerLink]="['/records/', record.id, 'edit']" class="btn btn-primary">
 					<i class='bx bx-pencil'></i>
@@ -10,15 +15,37 @@
 				</a>
 			</div>
 		</div>
+	</div>
+
+	<div class="card">
+		<!-- <div class="card-header"> -->
+			<!-- <div class="d-flex justify-content-between align-items-center"> -->
+				<!-- <p class="card-title m-0"><span class="form-label">Account </span> {{record.account.name}}</p> -->
+<!-- 
+				<div class="d-flex justify-content-end align-items-center gap-3">
+					<a [routerLink]="['/records/', record.id, 'edit']" class="btn btn-primary">
+						<i class='bx bx-pencil'></i>
+					</a>
+					<a href="" (click)="delete($event)" class="btn btn-danger">
+						<i class='bx bx-trash-alt'></i>
+					</a>
+				</div> -->
+			<!-- </div> -->
+			
+		<!-- </div> -->
 		<div class="card-body">
 			<div class="row p-2">
 				<div class="col-8">
-					<span class="form-label">Name</span>
-					<p>{{record.name}}</p>
+					<span class="form-label">Account</span>
+					<p>{{record.account.name}}</p>
 				</div>
 				<div class="col-4">
 					<span class="form-label">Date</span>
 					<p>{{record.recordDate | date}}</p>
+				</div>
+				<div class="col-12">
+					<span class="form-label">Name</span>
+					<p>{{record.name}}</p>
 				</div>
 				<div class="col-4">
 					<span class="form-label">Category</span>
@@ -26,7 +53,7 @@
 				</div>
 				<div class="col-4">
 					<span class="form-label">Amount</span>
-					<p>{{record.amount}}</p>
+					<p>{{record.account.currency.iso}} {{record.amount | currency:'':''}}</p>
 				</div>
 				<div class="col-4">
 					<span class="form-label">Type</span>

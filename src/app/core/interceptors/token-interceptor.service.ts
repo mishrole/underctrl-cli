@@ -41,15 +41,26 @@ export class TokenInterceptorService implements HttpInterceptor {
     return next.handle(req).pipe(
       catchError((error: HttpErrorResponse) => {
         if (error && error.status === 401) {
-          console.warn("ERROR, LOGOUT", error);
-          if (error.error.error_description.includes("Invalid refresh token") || error.error.error.includes('invalid_token')) {
-            this.authService.logout();
-            this.router.navigate(['/auth']);
-            return throwError(new Error("Failed to refresh session token. Please sign in"));
+          console.warn('catch 401, handler starts')
+          // if (error.error.error_description.includes("Invalid refresh token") || error.error.error.includes('invalid_token')) {
+          if (error.error.error_description.includes("Invalid refresh token")) {
+            console.error('Refresh token error', error);
+            this.logoutRedirect();
+            return throwError(new Error("Session expired. Please sign in"));
+          } else if (error.error.error_description.includes("Access token expired")) {
+            return this.handle401Error(authReq, next);
+          } else {
+            console.error("401 Error different to Access token expired & Invalid refresh token", error);
+            this.logoutRedirect();
+            return throwError(new Error("Unexpected error"));
           }
-
-          return this.handle401Error(authReq, next);
         } else {
+          console.warn('catch another error status, different to 401', error);
+          if (error.status === 0) {
+            console.error("Error Status 0")
+            this.logoutRedirect();
+            return throwError(new Error("Unexpected error"));
+          }
           return throwError(error);
         }
       })
@@ -98,10 +109,11 @@ export class TokenInterceptorService implements HttpInterceptor {
             
           }),
           catchError((err) => {
+            console.warn('switchMap catchError', err);
             this.isRefreshing = false;
-            this.authService.logout();
-            this.router.navigate(['/auth']);
-            return throwError(new Error("Session expired. Please, sign in"));
+            this.logoutRedirect();
+            // TODO: Check if throwError is called
+            return throwError(new Error("Session expired. Failed to refresh token. Please, sign in"));
           })
         );
       }
@@ -116,5 +128,10 @@ export class TokenInterceptorService implements HttpInterceptor {
 
   private addTokenHeader(request: HttpRequest<any>, token: string) {
     return request.clone({ headers: request.headers.set('Authorization', 'Bearer ' + token) });
+  }
+
+  private logoutRedirect(): void {
+    this.authService.logout();
+    this.router.navigate(['/auth']);
   }
 }

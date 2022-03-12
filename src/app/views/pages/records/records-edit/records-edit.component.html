@@ -1,6 +1,21 @@
-<div class="container py-4 mt-5">
+<div class="container pt-4 mt-5">
+	<!-- Back arrow -->
+	<div class="row pt-2 pb-3">
+		<div class="d-flex justify-content-between align-items-center">
+			<a [routerLink]="['/records', record.id, 'detail']" class="link-white d-flex align-items-center gap-2" *ngIf="record">
+				<i class='bx bx-arrow-back'></i>
+				<span>Back</span>
+			</a>
+
+			<a [routerLink]="['/home']" class="link-white d-flex align-items-center gap-2" *ngIf="!record">
+				<i class='bx bx-arrow-back'></i>
+				<span>Back</span>
+			</a>
+		</div>
+	</div>
 	<!-- <h3 class="px-4 py-3 text-white">New Account</h3> -->
-	<form [formGroup]="recordFormGroup" (ngSubmit)="updateRecord()" class="container px-4">
+	
+	<form [formGroup]="recordFormGroup" (ngSubmit)="updateRecord()" class="container px-4 pt-2">
 		<div class="row align-items-center justify-content-center mb-3">
 			<div class="col-12 mb-3">
 				<label for="name" class="form-label">Name</label>
@@ -76,8 +91,8 @@
 			
 		</div>
 
-		<div class="d-flex flex-column mb-5">
-			<button type="submit" class="btn btn-primary flex-fill">Update Record</button>
+		<div class="d-flex flex-column">
+			<button type="submit" class="btn btn-primary flex-fill mb-2">Update Record</button>
 		</div>
 
 	</form>

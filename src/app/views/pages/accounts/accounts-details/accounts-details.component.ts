@@ -111,5 +111,9 @@ export class AccountsDetailsComponent implements OnInit {
     })
   }
 
+  delete(event: any): void {
+    
+  }
+
 
 }

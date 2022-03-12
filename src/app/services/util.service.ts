@@ -57,15 +57,16 @@ export class UtilService {
     });
   }
 
-  confirmDialog(message: string): any {
+  confirmDialog(title: string, message: string = ''): any {
     return Swal.fire({
-      title: message,
+      title: title,
+      html: message,
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: 'rgba(49, 151, 149, 0.7)',
-      confirmButtonText: 'Si',
+      confirmButtonText: 'YES',
       cancelButtonColor: '#d33',
-      cancelButtonText: 'No',
+      cancelButtonText: 'NO',
     }).then((result) => {
       if (result.isConfirmed) {
         return result.value;

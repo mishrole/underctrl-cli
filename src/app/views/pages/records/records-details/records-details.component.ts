@@ -40,21 +40,24 @@ export class RecordsDetailsComponent implements OnInit, AfterViewInit {
   delete(event: any) {
     event.preventDefault();
 
-    this.spinner.show();
+    this.utilService.confirmDialog("Are you sure you want to delete this record?", "<small class='text-danger'>Note: There is no Undo.</small>").then((res: any) => {
+      if (res) {
+        this.spinner.show();
 
-    this.recordService.delete(this.recordId).subscribe(res => {
-      console.warn(res);
-      this.utilService.success('Record deleted');
-      this.router.navigate(['/home']);
-    }, err => {
-      this.spinner.hide();
-      console.warn(err);
-      this.utilService.errorHTML("", this.utilService.generateErrorMessage(err));
-    }, () => {
-      this.spinner.hide(); 
+        this.recordService.delete(this.recordId).subscribe(res => {
+          console.warn(res);
+          this.utilService.success('Record deleted');
+          this.router.navigate([`/accounts/${this.record.account.id}/detail`]);
+        }, err => {
+          this.spinner.hide();
+          console.warn(err);
+          this.utilService.errorHTML("", this.utilService.generateErrorMessage(err));
+        }, () => {
+          this.spinner.hide(); 
+          }
+        );
       }
-    );
-
+    });
   }
 
   getRecord(): void {
