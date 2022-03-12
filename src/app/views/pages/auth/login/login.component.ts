@@ -21,6 +21,7 @@ export class LoginComponent implements OnInit {
   savedSession: Session | undefined;
 
   loginFormGroup!: FormGroup;
+  returnUrl: string;
 
   constructor(
     private router: Router,
@@ -54,6 +55,11 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
+    this.activatedRoute.queryParams.subscribe(res => {
+      this.returnUrl = res.returnUrl;
+    });
+
     this.createLoginForm();
   }
 
@@ -96,6 +102,14 @@ export class LoginComponent implements OnInit {
           const session = new Session(res?.access_token, res?.refresh_token, user);
           this.authService.saveSession(session);
           console.warn('saved session', session);
+
+          if (this.returnUrl) {
+            console.log('returnUrl', this.returnUrl);
+
+            this.router.navigateByUrl(`${this.returnUrl}`);
+            return;
+          }
+
           this.redirectToHome();
 
           // this.utilService.success("Success! You logged in");
