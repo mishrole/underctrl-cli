@@ -88,7 +88,7 @@ export class AccountsAddComponent implements OnInit, AfterViewInit {
       this.accountService.save(account).subscribe(res => {
         console.warn(res);
         this.utilService.success('Account created');
-        this.router.navigate(['/home']);
+        this.router.navigate([`/accounts/${res.data.id}/detail`]);
         }, err => {
           this.spinner.hide();
           console.warn(err);

@@ -136,7 +136,8 @@ a {
 
 #container-floating:hover {
     height: 400px;
-    width: 90px;
+    // width: 90px;
+    width: 120px;
     padding: 30px;
 }
 
@@ -370,4 +371,6 @@ a {
     top: 4px;
     text-align: right;
     z-index: -1;
+
+    width: 120px;
 }

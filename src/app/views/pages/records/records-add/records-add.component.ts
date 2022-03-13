@@ -112,7 +112,7 @@ export class RecordsAddComponent implements OnInit, AfterViewInit {
       this.recordService.save(record).subscribe(res => {
         console.warn(res);
         this.utilService.success('Record created');
-        this.router.navigate(['/home']);
+        this.router.navigate([`/accounts/${account.id}/detail`]);
       }, err => {
           this.spinner.hide();
           console.warn(err);
