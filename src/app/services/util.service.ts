@@ -21,7 +21,6 @@ export class UtilService {
   setBreadcrum(breadcrum: string): void {
     this.breadcrum = breadcrum;
   }
-  
 
   success(message: string): void {
     Swal.fire({
@@ -57,9 +56,9 @@ export class UtilService {
     });
   }
 
-  confirmDialog(title: string, message: string = ''): any {
+  confirmDialog(newTitle: string, message: string = ''): any {
     return Swal.fire({
-      title: title,
+      title: newTitle,
       html: message,
       icon: 'warning',
       showCancelButton: true,
@@ -110,16 +109,16 @@ export class UtilService {
     });
   }
 
-  markFormTouched(group: FormGroup | FormArray) {
+  markFormTouched(group: FormGroup | FormArray): void {
     const controls: any = group.controls;
     Object.keys(controls).forEach((key: string) => {
       const control = controls[key];
       if (control instanceof FormGroup || control instanceof FormArray) { control.markAsTouched(); this.markFormTouched(control); }
-      else { control.markAsTouched(); };
+      else { control.markAsTouched(); }
     });
-  };
+  }
 
-  formatDate(date: string) {
+  formatDate(date: string): string {
     const stringDate = new Date(date);
     let month = '' + (stringDate.getMonth() + 1);
     let day = '' + stringDate.getDate();
@@ -129,10 +128,13 @@ export class UtilService {
     const minutes = stringDate.getMinutes();
     const seconds = stringDate.getSeconds();
 
-    if (month.length < 2) 
+    if (month.length < 2) {
         month = '0' + month;
-    if (day.length < 2) 
+    }
+
+    if (day.length < 2) {
         day = '0' + day;
+    }
 
     const formattedTime = [hours, minutes, seconds].join(':');
     const formattedDate = [year, month, day].join('-');
@@ -141,24 +143,26 @@ export class UtilService {
     return result;
   }
 
-  toDatetimeLocal(date: string) {
-    const newDate = new Date(date),ten = (i: any)=> ((i < 10 ? '0' : '') + i ),
-    YYYY = newDate.getFullYear(),
-    MTH = ten(newDate.getMonth() + 1),
-    DAY = ten(newDate.getDate()),
-    HH = ten(newDate.getHours()),
-    MM = ten(newDate.getMinutes())
-    //,
+  toDatetimeLocal(date: string): string {
+    const newDate = new Date(date);
+    const ten = (i: any) => ((i < 10 ? '0' : '') + i );
+
+    const YYYY = newDate.getFullYear();
+    const MTH = ten(newDate.getMonth() + 1);
+    const DAY = ten(newDate.getDate());
+    const HH = ten(newDate.getHours());
+    const MM = ten(newDate.getMinutes());
+
     // SS = ten(newDate.getSeconds())
     // MS = ten(date.getMilliseconds())
 
     // return `${YYYY}-${MTH}-${DAY}T${HH}:${MM}:${SS}`
-    return `${YYYY}-${MTH}-${DAY}T${HH}:${MM}`
+    return `${YYYY}-${MTH}-${DAY}T${HH}:${MM}`;
 }
 
   generateErrorMessage(param: any): string {
-    let data = param?.error;
-    let message = "";
+    const data = param?.error;
+    let message = '';
 
     if (data?.error_description) {
       message = `<p>${data?.error_description}</p>`;
@@ -171,12 +175,13 @@ export class UtilService {
     }
 
     if (typeof data?.errors === 'object' && data?.errors.length > 0) {
-      message += `<p class='text-danger fw-bold'>Cause:</p>`
-      for(let error of data?.errors) {
-        let values = Object.values(error);
-        
-        for (let value of values) {
-          message += `<p>${value}</p>`
+      message += `<p class='text-danger fw-bold'>Cause:</p>`;
+
+      for (const error of data?.errors) {
+        const values = Object.values(error);
+
+        for (const value of values) {
+          message += `<p>${value}</p>`;
         }
       }
     }

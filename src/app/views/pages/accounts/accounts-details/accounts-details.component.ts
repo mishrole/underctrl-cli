@@ -25,7 +25,7 @@ export class AccountsDetailsComponent implements OnInit {
 
   filter: RecordFilterRequest = new RecordFilterRequest();
 
-  accountId: number = 0;
+  accountId = 0;
   account: Account;
   records: Record[];
 
@@ -55,7 +55,7 @@ export class AccountsDetailsComponent implements OnInit {
     // this.dataService.setOption('search', true);
   }
 
-  // TODO: ADD PIPE TO CALL BOTH 
+  // TODO: ADD PIPE TO CALL BOTH
 
   getAccountById(): void {
     this.spinner.show();
@@ -63,41 +63,27 @@ export class AccountsDetailsComponent implements OnInit {
     this.accountService.getAccountById(this.accountId).subscribe(res => {
       console.warn(res);
       this.account = res.data;
-      this.dataService.setOption('breadcrum',`Account ${res.data?.name || ''}`);
+      this.dataService.setOption('breadcrum', `Account ${res.data?.name || ''}`);
       }, err => {
         this.spinner.hide();
         console.warn(err);
-        this.utilService.errorHTML("", this.utilService.generateErrorMessage(err));
+        this.utilService.errorHTML('', this.utilService.generateErrorMessage(err));
       }, () => this.spinner.hide()
     );
   }
-
-  // getRecordsFiltered(): void {
-  //   this.spinner.show();
-  //   this.recordService.allRecordsByAccount(this.accountId, this.filter).subscribe(res => {
-  //     console.warn(res);
-  //     this.records = res.data;
-  //     }, err => {
-  //       this.spinner.hide();
-  //       console.warn(err);
-  //       this.utilService.errorHTML("", this.utilService.generateErrorMessage(err));
-  //     }, () => this.spinner.hide()
-  //   );
-  // }
 
   getRecordsFiltered(): void {
     this.utilService.markFormTouched(this.accountFormGroup);
 
     if (this.accountFormGroup.valid) {
       this.filter.keyword = this.frmAccount.Keyword.value.trim();
-      
       this.recordService.allRecordsByAccount(this.accountId, this.filter).subscribe(res => {
         console.warn(res);
         this.records = res.data;
         }, err => {
           this.spinner.hide();
           console.warn(err);
-          this.utilService.errorHTML("", this.utilService.generateErrorMessage(err));
+          this.utilService.errorHTML('', this.utilService.generateErrorMessage(err));
         }, () => this.spinner.hide()
       );
 
@@ -107,7 +93,7 @@ export class AccountsDetailsComponent implements OnInit {
   createAccountForm(): void {
     this.accountFormGroup = this.formBuilder.group({
       Keyword: ['']
-    })
+    });
   }
 
 }

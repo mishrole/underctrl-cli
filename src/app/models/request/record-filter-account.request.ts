@@ -1,6 +1,6 @@
 export class RecordFilterAndOrAccountRequest {
-    keyword?: string;
-    start?: Date;
-    end?: Date;
-    accountId: number;
+  keyword?: string;
+  start?: Date;
+  end?: Date;
+  accountId: number;
 }

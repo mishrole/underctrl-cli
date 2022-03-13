@@ -1,16 +1,17 @@
-// import { User } from "../user";
-
 export class LoginResponse {
-    access_token?: string;
-    refresh_token: any;
-    email?: string;
-    firstname?: string;
-    lastname?: string;
-    roles: any;
-    id: number;
-    expires_in?: number;
-    jti?: string;
-    scope?: string;
-    token_type?: string;
-    // user?: User;
+  // tslint:disable-next-line:variable-name
+  access_token?: string;
+  // tslint:disable-next-line:variable-name
+  refresh_token: any;
+  email?: string;
+  firstname?: string;
+  lastname?: string;
+  roles: any;
+  id: number;
+  // tslint:disable-next-line:variable-name
+  expires_in?: number;
+  jti?: string;
+  scope?: string;
+  // tslint:disable-next-line:variable-name
+  token_type?: string;
 }

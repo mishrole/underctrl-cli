@@ -1,6 +1,6 @@
-import { Currency } from "./currency";
-import { Record } from "./record";
-import { User } from "./user";
+import { Currency } from './currency';
+import { Record } from './record';
+import { User } from './user';
 
 export class Account {
 	id: number;

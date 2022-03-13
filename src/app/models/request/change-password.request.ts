@@ -1,5 +1,5 @@
 export class ChangePasswordRequest {
-    current: string;
-    password: string;
-	confirm: string;
+  current: string;
+  password: string;
+  confirm: string;
 }

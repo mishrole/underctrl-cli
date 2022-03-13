@@ -12,9 +12,9 @@ import { UtilService } from 'src/app/services/util.service';
   styleUrls: ['./layout-base.component.scss']
 })
 export class LayoutBaseComponent implements OnInit {
-  
+
   breadcrum: any = 'Under CTRL';
-  search: boolean = false;
+  search = false;
   user: any;
 
   menu: MenuItem[];

@@ -41,25 +41,25 @@ export class TokenInterceptorService implements HttpInterceptor {
     return next.handle(req).pipe(
       catchError((error: HttpErrorResponse) => {
         if (error && error.status === 401) {
-          console.warn('catch 401, handler starts')
+          console.warn('catch 401, handler starts');
           // if (error.error.error_description.includes("Invalid refresh token") || error.error.error.includes('invalid_token')) {
-          if (error.error.error_description.includes("Invalid refresh token")) {
+          if (error.error.error_description.includes('Invalid refresh token')) {
             console.error('Refresh token error', error);
             this.logoutRedirect();
-            return throwError(new Error("Session expired. Please sign in"));
-          } else if (error.error.error_description.includes("Access token expired")) {
+            return throwError(new Error('Session expired. Please sign in'));
+          } else if (error.error.error_description.includes('Access token expired')) {
             return this.handle401Error(authReq, next);
           } else {
-            console.error("401 Error different to Access token expired & Invalid refresh token", error);
+            console.error('401 Error different to Access token expired & Invalid refresh token', error);
             this.logoutRedirect();
-            return throwError(new Error("Unexpected error"));
+            return throwError(new Error('Unexpected error'));
           }
         } else {
           console.warn('catch another error status, different to 401', error);
           if (error.status === 0) {
-            console.error("Error Status 0")
+            console.error('Error Status 0');
             this.logoutRedirect();
-            return throwError(new Error("Unexpected error"));
+            return throwError(new Error('Unexpected error'));
           }
           return throwError(error);
         }
@@ -84,36 +84,36 @@ export class TokenInterceptorService implements HttpInterceptor {
             this.isRefreshing = false;
 
             const user = new User();
-            const roles : Role[] = [];
-            
-            for (let item of tokenResponse?.roles) {
+            const roles: Role[] = [];
+
+            for (const item of tokenResponse?.roles) {
               const role = new Role();
               role.id = item.id;
               role.name = item.name;
               roles.push(role);
             }
-            
+
             user.roles = roles;
-            
+
             user.id = tokenResponse?.id;
-            user.firstname = tokenResponse?.firstname ||'';
+            user.firstname = tokenResponse?.firstname || '';
             user.lastname = tokenResponse?.lastname || '';
             user.email = tokenResponse?.email || '';
-            const session = new Session(tokenResponse?.access_token, tokenResponse?.refresh_token, user);
-            this.authService.saveSession(session);
-            console.warn('NEW SESSION:', session);
+            const newSession = new Session(tokenResponse?.access_token, tokenResponse?.refresh_token, user);
+            this.authService.saveSession(newSession);
+            console.warn('NEW SESSION:', newSession);
 
-            this.refreshTokenSubject.next(session.access_token);
+            this.refreshTokenSubject.next(newSession.access_token);
 
             return next.handle(this.addTokenHeader(request, tokenResponse.access_token));
-            
+
           }),
           catchError((err) => {
             console.warn('switchMap catchError', err);
             this.isRefreshing = false;
             this.logoutRedirect();
             // TODO: Check if throwError is called
-            return throwError(new Error("Session expired. Failed to refresh token. Please, sign in"));
+            return throwError(new Error('Session expired. Failed to refresh token. Please, sign in'));
           })
         );
       }
@@ -126,7 +126,7 @@ export class TokenInterceptorService implements HttpInterceptor {
     );
   }
 
-  private addTokenHeader(request: HttpRequest<any>, token: string) {
+  private addTokenHeader(request: HttpRequest<any>, token: string): HttpRequest<any> {
     return request.clone({ headers: request.headers.set('Authorization', 'Bearer ' + token) });
   }
 

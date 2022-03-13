@@ -10,7 +10,8 @@ import { AccountsListComponent } from './accounts-list/accounts-list.component';
 
 const routes: Routes = [
   {
-    path: '', component: AccountsComponent,
+    path: '',
+    component: AccountsComponent,
     children: [
       {
         path: '',

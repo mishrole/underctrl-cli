@@ -1,18 +1,22 @@
-import { User } from "./user";
+import { User } from './user';
 
 export class Session {
-	authenticated: boolean = false;
-	user?: User;
-	// token_type: string;
-	// scope: string;
-	access_token?: string;
-	refresh_token?: string;
-	// expires_in: number;
-	// jti: string;
+  authenticated = false;
+  user?: User;
+  // tslint:disable-next-line:variable-name
+  access_token?: string;
+  // tslint:disable-next-line:variable-name
+  refresh_token?: string;
 
-	constructor(access_token?: string, refresh_token?: string, user?: User) {
-		this.access_token = access_token;
-		this.refresh_token = refresh_token;
-		this.user = user;
-	}
+  // token_type: string;
+  // scope: string;
+  // expires_in: number;
+  // jti: string;
+
+  // tslint:disable-next-line:variable-name
+  constructor(access_token?: string, refresh_token?: string, user?: User) {
+    this.access_token = access_token;
+    this.refresh_token = refresh_token;
+    this.user = user;
+  }
 }

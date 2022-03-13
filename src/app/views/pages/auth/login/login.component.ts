@@ -64,9 +64,6 @@ export class LoginComponent implements OnInit {
   }
 
   authenticate(): void {
-    // console.info('this.loginFormGroup.value', this.loginFormGroup.value);
-    // console.info('this.loginFormGroup', this.loginFormGroup);
-    // console.info('this.frmLogin', this.frmLogin);
 
     this.utilService.markFormTouched(this.loginFormGroup);
 
@@ -79,51 +76,51 @@ export class LoginComponent implements OnInit {
         Constants.GRANT_TYPE_TOKEN
       );
 
-        this.authService.oauth(loginRequest).subscribe(res => {
+      this.authService.oauth(loginRequest).subscribe(res => {
 
-          const user = new User();
+        const user = new User();
 
-          const roles : Role[] = [];
-          
-          for (let item of res?.roles) {
-            const role = new Role();
-            role.id = item.id;
-            role.name = item.name;
-            roles.push(role);
-          }
-          
-          user.roles = roles;
+        const roles: Role[] = [];
 
-          user.id = res?.id;
-          user.firstname = res?.firstname ||'';
-          user.lastname = res?.lastname || '';
-          user.email = res?.email || '';
+        for (const item of res?.roles) {
+          const role = new Role();
+          role.id = item.id;
+          role.name = item.name;
+          roles.push(role);
+        }
 
-          const session = new Session(res?.access_token, res?.refresh_token, user);
-          this.authService.saveSession(session);
-          console.warn('saved session', session);
+        user.roles = roles;
 
-          if (this.returnUrl) {
-            console.log('returnUrl', this.returnUrl);
+        user.id = res?.id;
+        user.firstname = res?.firstname || '';
+        user.lastname = res?.lastname || '';
+        user.email = res?.email || '';
 
-            this.router.navigateByUrl(`${this.returnUrl}`);
-            return;
-          }
+        const session = new Session(res?.access_token, res?.refresh_token, user);
+        this.authService.saveSession(session);
+        console.warn('saved session', session);
 
-          this.redirectToHome();
+        if (this.returnUrl) {
+          console.log('returnUrl', this.returnUrl);
 
-          // this.utilService.success("Success! You logged in");
-        }, err => {
-          this.spinner.hide();
-          console.warn(err);
-          // this.utilService.error("", err?.error.error_description);
-          this.utilService.errorHTML("", this.utilService.generateErrorMessage(err));
-        }, () => {
-          this.spinner.hide(); 
-          }
-        );
+          this.router.navigateByUrl(`${this.returnUrl}`);
+          return;
+        }
+
+        this.redirectToHome();
+
+        // this.utilService.success("Success! You logged in");
+      }, err => {
+        this.spinner.hide();
+        console.warn(err);
+
+        this.utilService.errorHTML('', this.utilService.generateErrorMessage(err));
+      }, () => {
+        this.spinner.hide();
+        }
+      );
     } else {
-      this.utilService.warn("Please review the information entered");
+      this.utilService.warn('Please review the information entered');
     }
 
   }
@@ -131,14 +128,5 @@ export class LoginComponent implements OnInit {
   private redirectToHome(): void {
     this.router.navigate(['/home']);
   }
-
-  // private markFormTouched(group: FormGroup | FormArray) {
-  //   const controls: any = group.controls;
-  //   Object.keys(controls).forEach((key: string) => {
-  //     const control = controls[key];
-  //     if (control instanceof FormGroup || control instanceof FormArray) { control.markAsTouched(); this.markFormTouched(control); }
-  //     else { control.markAsTouched(); };
-  //   });
-  // };
 
 }

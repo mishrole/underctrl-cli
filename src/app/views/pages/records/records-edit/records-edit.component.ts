@@ -21,7 +21,7 @@ import { UtilService } from 'src/app/services/util.service';
 })
 export class RecordsEditComponent implements OnInit, AfterViewInit {
 
-  recordId: number = 0;
+  recordId = 0;
   record: Record;
 
   recordFormGroup!: FormGroup;
@@ -76,7 +76,7 @@ export class RecordsEditComponent implements OnInit, AfterViewInit {
       Account: ['', Validators.compose([
         Validators.required
       ])]
-    })
+    });
   }
 
   ngOnInit(): void {
@@ -85,11 +85,11 @@ export class RecordsEditComponent implements OnInit, AfterViewInit {
       this.getRecord();
     });
 
-    this.today = new Date().toISOString().split("T")[0];
+    this.today = new Date().toISOString().split('T')[0];
     this.user = this.authService.getSession()?.user;
 
     this.getTypes();
-    
+
     this.getAccounts();
     this.getCategories();
     this.createRecordForm();
@@ -125,7 +125,7 @@ export class RecordsEditComponent implements OnInit, AfterViewInit {
       }, err => {
           this.spinner.hide();
           console.warn(err);
-          this.utilService.errorHTML("", this.utilService.generateErrorMessage(err));
+          this.utilService.errorHTML('', this.utilService.generateErrorMessage(err));
         }, () => this.spinner.hide()
       );
     }
@@ -146,13 +146,13 @@ export class RecordsEditComponent implements OnInit, AfterViewInit {
       this.frmRecord.Type.setValue(res.data.type.id);
       this.frmRecord.Amount.setValue(res.data.amount);
 
-      this.dataService.setOption('breadcrum',`Edit ${res?.data?.name}`);
+      this.dataService.setOption('breadcrum', `Edit ${res?.data?.name}`);
     }, err => {
       this.spinner.hide();
       console.warn(err);
-      this.utilService.errorHTML("", this.utilService.generateErrorMessage(err));
+      this.utilService.errorHTML('', this.utilService.generateErrorMessage(err));
     }, () => {
-      this.spinner.hide(); 
+      this.spinner.hide();
       }
     );
   }
@@ -165,9 +165,9 @@ export class RecordsEditComponent implements OnInit, AfterViewInit {
     }, err => {
       this.spinner.hide();
       console.warn(err);
-      this.utilService.errorHTML("", this.utilService.generateErrorMessage(err));
+      this.utilService.errorHTML('', this.utilService.generateErrorMessage(err));
     }, () => {
-      this.spinner.hide(); 
+      this.spinner.hide();
       }
     );
   }
@@ -180,9 +180,9 @@ export class RecordsEditComponent implements OnInit, AfterViewInit {
     }, err => {
       this.spinner.hide();
       console.warn(err);
-      this.utilService.errorHTML("", this.utilService.generateErrorMessage(err));
+      this.utilService.errorHTML('', this.utilService.generateErrorMessage(err));
     }, () => {
-      this.spinner.hide(); 
+      this.spinner.hide();
       }
     );
   }
@@ -195,9 +195,9 @@ export class RecordsEditComponent implements OnInit, AfterViewInit {
     }, err => {
       this.spinner.hide();
       console.warn(err);
-      this.utilService.errorHTML("", this.utilService.generateErrorMessage(err));
+      this.utilService.errorHTML('', this.utilService.generateErrorMessage(err));
     }, () => {
-      this.spinner.hide(); 
+      this.spinner.hide();
       }
     );
   }

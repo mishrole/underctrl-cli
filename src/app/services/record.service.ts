@@ -16,12 +16,12 @@ export class RecordService {
   ) { }
 
   allRecordsByAccount(id: number, filter: any): Observable<BaseResponse<any>> {
-    let httpOptions = this.authService.getHttpOptionsWithParams('application/json', filter);
+    const httpOptions = this.authService.getHttpOptionsWithParams('application/json', filter);
     return this.http.get<any>(`${environment.api}/api/v1/records/account/${id}/search`, httpOptions);
   }
 
   allRecordsByOwnerAndOrAccountAndFilters(id: number, filter: any): Observable<BaseResponse<any>> {
-    let httpOptions = this.authService.getHttpOptionsWithParams('application/json', filter);
+    const httpOptions = this.authService.getHttpOptionsWithParams('application/json', filter);
     return this.http.get<any>(`${environment.api}/api/v1/records/owner/${id}/search`, httpOptions);
   }
 
@@ -40,5 +40,5 @@ export class RecordService {
   delete(id: number): Observable<BaseResponse<any>> {
     return this.http.delete<any>(`${environment.api}/api/v1/records/${id}`, {headers: this.authService.getHeaderBearerToken()});
   }
-  
+
 }

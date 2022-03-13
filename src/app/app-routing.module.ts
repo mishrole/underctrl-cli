@@ -7,28 +7,55 @@ import { LayoutBaseComponent } from './views/layout/layout-base/layout-base.comp
 import { AuthGuard } from './core/auth.guard';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'auth', pathMatch: 'full' },
-  { path: 'auth', loadChildren: () => import('./views/pages/auth/auth.module').then(m => m.AuthModule) },
-  
+  {
+    path: '',
+    redirectTo: 'auth',
+    pathMatch: 'full'
+  },
+  {
+    path: 'auth',
+    loadChildren: () => import('./views/pages/auth/auth.module').then(m => m.AuthModule)
+  },
   {
     path: '', component: LayoutBaseComponent, canActivate: [AuthGuard],
     children: [
-      { path: 'home', loadChildren: () => import('./views/pages/home/home.module').then(m => m.HomeModule), canActivate: [AuthGuard] },
-      { path: 'accounts', loadChildren: () => import('./views/pages/accounts/accounts.module').then(m => m.AccountsModule), canActivate: [AuthGuard]},
-      { path: 'records', loadChildren: () => import('./views/pages/records/records.module').then(m => m.RecordsModule), canActivate: [AuthGuard]},
-      { path: '', redirectTo: 'home', pathMatch: 'full'}
+      {
+        path: 'home',
+        loadChildren: () => import('./views/pages/home/home.module').then(m => m.HomeModule), canActivate: [AuthGuard]
+      },
+      {
+        path: 'accounts',
+        loadChildren: () => import('./views/pages/accounts/accounts.module').then(m => m.AccountsModule), canActivate: [AuthGuard]
+      },
+      {
+        path: 'records',
+        loadChildren: () => import('./views/pages/records/records.module').then(m => m.RecordsModule), canActivate: [AuthGuard]
+      },
+      {
+        path: '',
+        redirectTo: 'home',
+        pathMatch: 'full'
+      }
     ]
   },
-
   {
-    path: 'error', component: ErrorPageComponent, data: {
+    path: 'error',
+    component: ErrorPageComponent,
+    data: {
       type: 404,
       title: 'Page Not Found',
       desc: 'The page you were looking for doesn\'t exist.'
     }
   },
-  { path : 'error/:type', component: ErrorPageComponent },
-  { path: '**', redirectTo: 'error', pathMatch: 'full'}
+  {
+    path : 'error/:type',
+    component: ErrorPageComponent
+  },
+  {
+    path: '**',
+    redirectTo: 'error',
+    pathMatch: 'full'
+  }
 ];
 
 @NgModule({

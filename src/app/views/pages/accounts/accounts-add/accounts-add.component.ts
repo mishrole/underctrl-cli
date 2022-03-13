@@ -43,7 +43,7 @@ export class AccountsAddComponent implements OnInit, AfterViewInit {
       Currency: ['', Validators.compose([
         Validators.required
       ])]
-    })
+    });
   }
 
   getCurrencies(): void {
@@ -54,15 +54,15 @@ export class AccountsAddComponent implements OnInit, AfterViewInit {
     }, err => {
       this.spinner.hide();
       console.warn(err);
-      this.utilService.errorHTML("", this.utilService.generateErrorMessage(err));
+      this.utilService.errorHTML('', this.utilService.generateErrorMessage(err));
     }, () => {
-      this.spinner.hide(); 
+      this.spinner.hide();
       }
     );
   }
 
   ngAfterViewInit(): void {
-    this.dataService.setOption('breadcrum','New Account');
+    this.dataService.setOption('breadcrum', 'New Account');
   }
 
   ngOnInit(): void {
@@ -92,11 +92,11 @@ export class AccountsAddComponent implements OnInit, AfterViewInit {
         }, err => {
           this.spinner.hide();
           console.warn(err);
-          this.utilService.errorHTML("", this.utilService.generateErrorMessage(err));
+          this.utilService.errorHTML('', this.utilService.generateErrorMessage(err));
         }, () => this.spinner.hide()
       );
     } else {
-      this.utilService.warn("Please review the information entered");
+      this.utilService.warn('Please review the information entered');
     }
   }
 

@@ -113,3 +113,13 @@
 .text-success {
 	color: var(--primary-color-dark-full) !important;
 }
+
+// NGX CHARTS
+
+.advanced-pie-legend .legend-items-container .legend-items .legend-item:hover {
+  color: rgba(255, 255, 255, 0.8) !important;
+}
+
+.ngx-charts text {
+  fill: #a0aabe;
+}

@@ -10,31 +10,36 @@ import { RecoverPasswordComponent } from './recover-password/recover-password.co
 
 const routes: Routes = [
   {
-    path: '', component: AuthComponent,
+    path: '',
+    component: AuthComponent,
     children: [
       {
-        path: '', component: LoginComponent
+        path: '',
+        component: LoginComponent
       },
-      { 
-        path: 'signup', component: RegisterComponent
+      {
+        path: 'signup',
+        component: RegisterComponent
       },
-      { 
-        path: 'forgot-password', component: ForgotPasswordComponent
+      {
+        path: 'forgot-password',
+        component: ForgotPasswordComponent
       },
-      { 
-        path: 'recover-password', component: RecoverPasswordComponent
+      {
+        path: 'recover-password',
+        component: RecoverPasswordComponent
       }
     ]
   }
-]
+];
 
 @NgModule({
   declarations: [
-    AuthComponent,// OMG, IMPORTANT TO USE ROUTER-OUTLET ON AUTH COMPONENT HTML
+    AuthComponent, // OMG, IMPORTANT TO USE ROUTER-OUTLET ON AUTH COMPONENT HTML
     LoginComponent,
     RegisterComponent,
     ForgotPasswordComponent,
-    RecoverPasswordComponent 
+    RecoverPasswordComponent
   ],
   imports: [
     CommonModule,

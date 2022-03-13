@@ -6,7 +6,6 @@ import { Constants } from '../core/constants';
 import { MenuItem } from '../models/menu-item';
 import { LoginRequest } from '../models/request/login.request';
 import { RefreshTokenRequest } from '../models/request/refresh-token.request';
-import { BaseResponse } from '../models/response/base.response';
 import { LoginResponse } from '../models/response/login.response';
 import { Session } from '../models/session';
 
@@ -19,20 +18,22 @@ export class AuthenticationService {
     private http: HttpClient
   ) { }
 
+  menuItems: MenuItem[];
+
   getHeaderBearerToken(): HttpHeaders {
-    let token = this.getSession()?.access_token;
-    let headers = new HttpHeaders({
-      'Authorization': `Bearer ${token}`
+    const token = this.getSession()?.access_token;
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`
     });
 
     return headers;
   }
 
   getHttpOptions(contentType: string): object {
-    let token = this.getSession()?.access_token;
-    let httpOptions = { 
+    const token = this.getSession()?.access_token;
+    const httpOptions = {
       headers: new HttpHeaders({
-        'Authorization': `Bearer ${token}`,
+        Authorization: `Bearer ${token}`,
         'Content-Type': contentType
       })
     };
@@ -41,7 +42,7 @@ export class AuthenticationService {
   }
 
   getHttpOptionsWithParams(contentType: string, filter: any): object {
-    let token = this.getSession()?.access_token;
+    const token = this.getSession()?.access_token;
 
     let params = new HttpParams();
 
@@ -51,56 +52,44 @@ export class AuthenticationService {
       }
     }
 
-    let httpOptions = { 
+    const httpOptions = {
       headers: new HttpHeaders({
-        'Authorization': `Bearer ${token}`,
+        Authorization: `Bearer ${token}`,
         'Content-Type': contentType
       }),
-      params: params
+      params
     };
 
     return httpOptions;
   }
 
-  // getHttpParams(filter: any): object {
-  //   let params = new HttpParams();
-
-  //   for (const key in filter) {
-  //     if ((filter[key] !== undefined) && (filter[key] !== null)) {
-  //       params = params.append(key.toString(), filter[key]);
-  //     }
-  //   }
-
-  //   return params;
-  // }
-
   oauth(loginRequest: LoginRequest): Observable<LoginResponse> {
 
     const params = new URLSearchParams();
-    params.append("grant_type", loginRequest.grant_type);
-    params.append("password", loginRequest.password);
-    params.append("username", loginRequest.username);
+    params.append('grant_type', loginRequest.grant_type);
+    params.append('password', loginRequest.password);
+    params.append('username', loginRequest.username);
 
-    let headers = new HttpHeaders({
-      'Authorization': 'Basic ' + btoa(`${Constants.API_USER}:${Constants.API_PWD}`),
+    const headers = new HttpHeaders({
+      Authorization: 'Basic ' + btoa(`${Constants.API_USER}:${Constants.API_PWD}`),
       'Content-type': 'application/x-www-form-urlencoded; charset=utf-8'
     });
 
-    return this.http.post<LoginResponse>(`${environment.api}/oauth/token`, params.toString(), {headers: headers});
+    return this.http.post<LoginResponse>(`${environment.api}/oauth/token`, params.toString(), {headers});
   }
 
-  refreshToken(refreshTokenRequest : RefreshTokenRequest): Observable<any> {
+  refreshToken(refreshTokenRequest: RefreshTokenRequest): Observable<any> {
 
     const params = new URLSearchParams();
-    params.append("grant_type", refreshTokenRequest.grant_type);
-    params.append("refresh_token", refreshTokenRequest.refresh_token);
+    params.append('grant_type', refreshTokenRequest.grant_type);
+    params.append('refresh_token', refreshTokenRequest.refresh_token);
 
-    let headers = new HttpHeaders({
-      'Authorization': 'Basic ' + btoa(`${Constants.API_USER}:${Constants.API_PWD}`),
+    const headers = new HttpHeaders({
+      Authorization: 'Basic ' + btoa(`${Constants.API_USER}:${Constants.API_PWD}`),
       'Content-type': 'application/x-www-form-urlencoded; charset=utf-8'
     });
 
-    return this.http.post<any>(`${environment.api}/oauth/token`, params.toString(), {headers: headers});
+    return this.http.post<any>(`${environment.api}/oauth/token`, params.toString(), {headers});
   }
 
   saveSession(session: Session): void {
@@ -113,13 +102,16 @@ export class AuthenticationService {
   }
 
   getSession(): Session | undefined {
-    if (!sessionStorage.getItem('auth')) {
-      return;
-    }
-    return JSON.parse(sessionStorage.getItem('auth')!!) as Session;
-  }
 
-  menuItems: MenuItem[];
+    const session = sessionStorage.getItem('auth');
+
+    if (session != null) {
+      return JSON.parse(session) as Session;
+    }
+
+    return;
+
+  }
 
   loadMenuItems(user: any): MenuItem[] {
 
@@ -136,9 +128,9 @@ export class AuthenticationService {
           {name: 'Spending', url: '/spending', icon: 'bxs-doughnut-chart'},
           {name: 'Categories', url: '/categories', icon: 'bx-category-alt'},
           {name: 'Contacts', url: '/contacts', icon: 'bxs-contact'}
-        ]
+        ];
       }
-  
+
       if (firstRole.id === Constants.ROLE_USER) {
         this.menuItems = [
           {name: 'Home', url: '/home', icon: 'bx-home-alt'},
@@ -147,7 +139,7 @@ export class AuthenticationService {
           {name: 'Spending', url: '/spending', icon: 'bxs-doughnut-chart'},
           {name: 'Categories', url: '/categories', icon: 'bx-category-alt'},
           {name: 'Contacts', url: '/contacts', icon: 'bxs-contact'}
-        ]
+        ];
       }
     }
 

@@ -9,15 +9,10 @@ export class DataService {
   private data: any = {};
   subject = new Subject();
 
-  setOption(option: any, value: any) {
+  setOption(option: any, value: any): void {
     this.data[option] = value;
     this.subject.next(this.data);
-    // console.log(this.data);
-  }  
-
-  // getOption() {
-  //   return this.data;
-  // }
+  }
 
   constructor() { }
 }

@@ -18,7 +18,7 @@ import { UtilService } from 'src/app/services/util.service';
 })
 export class AccountsEditComponent implements OnInit, AfterViewInit {
 
-  accountId: number = 0;
+  accountId = 0;
   account: Account;
 
   accountFormGroup!: FormGroup;
@@ -59,7 +59,7 @@ export class AccountsEditComponent implements OnInit, AfterViewInit {
       Currency: ['', Validators.compose([
         Validators.required
       ])]
-    })
+    });
   }
 
   getCurrencies(): void {
@@ -70,9 +70,9 @@ export class AccountsEditComponent implements OnInit, AfterViewInit {
     }, err => {
       this.spinner.hide();
       console.warn(err);
-      this.utilService.errorHTML("", this.utilService.generateErrorMessage(err));
+      this.utilService.errorHTML('', this.utilService.generateErrorMessage(err));
     }, () => {
-      this.spinner.hide(); 
+      this.spinner.hide();
       }
     );
   }
@@ -87,13 +87,13 @@ export class AccountsEditComponent implements OnInit, AfterViewInit {
       this.frmAccount.Name.setValue(res.data.name);
       this.frmAccount.Currency.setValue(res.data.currency.id);
 
-      this.dataService.setOption('breadcrum',`Edit ${res?.data?.name}`);
+      this.dataService.setOption('breadcrum', `Edit ${res?.data?.name}`);
     }, err => {
       this.spinner.hide();
       console.warn(err);
-      this.utilService.errorHTML("", this.utilService.generateErrorMessage(err));
+      this.utilService.errorHTML('', this.utilService.generateErrorMessage(err));
     }, () => {
-      this.spinner.hide(); 
+      this.spinner.hide();
       }
     );
   }
@@ -120,7 +120,7 @@ export class AccountsEditComponent implements OnInit, AfterViewInit {
         }, err => {
           this.spinner.hide();
           console.warn(err);
-          this.utilService.errorHTML("", this.utilService.generateErrorMessage(err));
+          this.utilService.errorHTML('', this.utilService.generateErrorMessage(err));
         }, () => this.spinner.hide()
       );
     }
@@ -129,8 +129,8 @@ export class AccountsEditComponent implements OnInit, AfterViewInit {
   delete(event: any): void {
     event.preventDefault();
 
-    this.utilService.confirmDialog("Are you sure you want to delete this account?", "<small class='text-danger'>Note: There is no Undo.</small>").then((res: any) => {
-      if (res) {
+    this.utilService.confirmDialog('Are you sure you want to delete this account?', '<small class=\'text-danger\'>Note: There is no Undo.</small>').then((confirm: any) => {
+      if (confirm) {
         this.spinner.show();
 
         this.accountService.delete(this.accountId).subscribe(res => {
@@ -140,9 +140,9 @@ export class AccountsEditComponent implements OnInit, AfterViewInit {
         }, err => {
           this.spinner.hide();
           console.warn(err);
-          this.utilService.errorHTML("", this.utilService.generateErrorMessage(err));
+          this.utilService.errorHTML('', this.utilService.generateErrorMessage(err));
         }, () => {
-          this.spinner.hide(); 
+          this.spinner.hide();
           }
         );
       }

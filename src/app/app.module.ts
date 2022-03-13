@@ -13,6 +13,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TokenInterceptorService } from './core/interceptors/token-interceptor.service';
 import { DataService } from './services/data.service';
+import { ChartsModule } from 'ng2-charts';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { DataService } from './services/data.service';
     FormsModule,
     NgxSpinnerModule,
     NgbModule,
+    ChartsModule,
     WebcamModule
   ],
   providers: [

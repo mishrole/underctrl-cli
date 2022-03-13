@@ -42,7 +42,7 @@ export class RecordsListComponent implements OnInit, AfterViewInit {
   ) { }
 
   ngAfterViewInit(): void {
-    this.dataService.setOption('breadcrum','Records');
+    this.dataService.setOption('breadcrum', 'Records');
   }
 
   get frmRecord(): any { return this.recordFormGroup.controls; }
@@ -59,7 +59,7 @@ export class RecordsListComponent implements OnInit, AfterViewInit {
     this.recordFormGroup = this.formBuilder.group({
       Keyword: [''],
       Account: ['']
-    })
+    });
   }
 
   getAccounts(): void {
@@ -70,9 +70,9 @@ export class RecordsListComponent implements OnInit, AfterViewInit {
     }, err => {
       this.spinner.hide();
       console.warn(err);
-      this.utilService.errorHTML("", this.utilService.generateErrorMessage(err));
+      this.utilService.errorHTML('', this.utilService.generateErrorMessage(err));
     }, () => {
-      this.spinner.hide(); 
+      this.spinner.hide();
       }
     );
   }
@@ -83,14 +83,14 @@ export class RecordsListComponent implements OnInit, AfterViewInit {
     if (this.recordFormGroup.valid) {
       this.filter.keyword = this.frmRecord.Keyword.value.trim();
       this.filter.accountId = this.frmRecord.Account.value;
-      
+
       this.recordService.allRecordsByOwnerAndOrAccountAndFilters(this.user.id, this.filter).subscribe(res => {
         console.warn(res);
         this.records = res.data;
         }, err => {
           this.spinner.hide();
           console.warn(err);
-          this.utilService.errorHTML("", this.utilService.generateErrorMessage(err));
+          this.utilService.errorHTML('', this.utilService.generateErrorMessage(err));
         }, () => this.spinner.hide()
       );
 

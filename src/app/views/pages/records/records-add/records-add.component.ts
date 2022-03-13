@@ -43,7 +43,7 @@ export class RecordsAddComponent implements OnInit, AfterViewInit {
   ) { }
 
   ngAfterViewInit(): void {
-    this.dataService.setOption('breadcrum','New Record');
+    this.dataService.setOption('breadcrum', 'New Record');
   }
 
   get frmRecord(): any { return this.recordFormGroup.controls; }
@@ -72,11 +72,11 @@ export class RecordsAddComponent implements OnInit, AfterViewInit {
       Account: ['', Validators.compose([
         Validators.required
       ])]
-    })
+    });
   }
 
   ngOnInit(): void {
-    this.today = new Date().toISOString().split("T")[0];
+    this.today = new Date().toISOString().split('T')[0];
     this.user = this.authService.getSession()?.user;
 
     this.createRecordForm();
@@ -116,7 +116,7 @@ export class RecordsAddComponent implements OnInit, AfterViewInit {
       }, err => {
           this.spinner.hide();
           console.warn(err);
-          this.utilService.errorHTML("", this.utilService.generateErrorMessage(err));
+          this.utilService.errorHTML('', this.utilService.generateErrorMessage(err));
         }, () => this.spinner.hide()
       );
     }
@@ -130,9 +130,9 @@ export class RecordsAddComponent implements OnInit, AfterViewInit {
     }, err => {
       this.spinner.hide();
       console.warn(err);
-      this.utilService.errorHTML("", this.utilService.generateErrorMessage(err));
+      this.utilService.errorHTML('', this.utilService.generateErrorMessage(err));
     }, () => {
-      this.spinner.hide(); 
+      this.spinner.hide();
       }
     );
   }
@@ -145,9 +145,9 @@ export class RecordsAddComponent implements OnInit, AfterViewInit {
     }, err => {
       this.spinner.hide();
       console.warn(err);
-      this.utilService.errorHTML("", this.utilService.generateErrorMessage(err));
+      this.utilService.errorHTML('', this.utilService.generateErrorMessage(err));
     }, () => {
-      this.spinner.hide(); 
+      this.spinner.hide();
       }
     );
   }
@@ -160,9 +160,9 @@ export class RecordsAddComponent implements OnInit, AfterViewInit {
     }, err => {
       this.spinner.hide();
       console.warn(err);
-      this.utilService.errorHTML("", this.utilService.generateErrorMessage(err));
+      this.utilService.errorHTML('', this.utilService.generateErrorMessage(err));
     }, () => {
-      this.spinner.hide(); 
+      this.spinner.hide();
       }
     );
   }

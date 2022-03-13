@@ -3,10 +3,9 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Session } from 'src/app/models/session';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { concatMap, mergeMap } from 'rxjs/operators';
+import { concatMap } from 'rxjs/operators';
 import { Constants } from 'src/app/core/constants';
 import { LoginRequest } from 'src/app/models/request/login.request';
-import { LoginResponse } from 'src/app/models/response/login.response';
 import { Role } from 'src/app/models/role';
 import { User } from 'src/app/models/user';
 import { AuthenticationService } from 'src/app/services/authentication.service';
@@ -65,7 +64,7 @@ export class RegisterComponent implements OnInit {
 
   ngOnInit(): void {
     this.createRegisterForm();
-    this.today = new Date;
+    this.today = new Date();
   }
 
   register(): void {
@@ -85,27 +84,27 @@ export class RegisterComponent implements OnInit {
       this.userService.register(user).pipe(
         concatMap(() => this.authService.oauth(new LoginRequest(user.email, user.password, Constants.GRANT_TYPE_TOKEN)))
       ).subscribe(res => {
-        console.info('res', res);
+        console.log('res', res);
 
-        const user = new User();
+        const sessionUser = new User();
 
-        const roles : Role[] = [];
-        
-        for (let item of res?.roles) {
+        const roles: Role[] = [];
+
+        for (const item of res?.roles) {
           const role = new Role();
           role.id = item.id;
           role.name = item.name;
           roles.push(role);
         }
-        
-        user.roles = roles;
 
-        user.id = res?.id;
-        user.firstname = res?.firstname ||'';
-        user.lastname = res?.lastname || '';
-        user.email = res?.email || '';
+        sessionUser.roles = roles;
 
-        const session = new Session(res?.access_token, res?.refresh_token, user);
+        sessionUser.id = res?.id;
+        sessionUser.firstname = res?.firstname || '';
+        sessionUser.lastname = res?.lastname || '';
+        sessionUser.email = res?.email || '';
+
+        const session = new Session(res?.access_token, res?.refresh_token, sessionUser);
         this.authService.saveSession(session);
         console.warn('saved session', session);
         this.redirectToHome();
@@ -114,14 +113,13 @@ export class RegisterComponent implements OnInit {
         err => {
           this.spinner.hide();
           console.warn(err);
-          // this.utilService.error("", err?.error?.error_description);
-          this.utilService.errorHTML("", this.utilService.generateErrorMessage(err));
+          this.utilService.errorHTML('', this.utilService.generateErrorMessage(err));
         }, () => this.spinner.hide()
       );
 
       console.log(user);
     } else {
-      this.utilService.warn("Please review the information entered");
+      this.utilService.warn('Please review the information entered');
     }
   }
 
@@ -129,7 +127,7 @@ export class RegisterComponent implements OnInit {
     this.router.navigate(['/home']);
   }
 
-  checkPasswords(group: FormGroup) {
+  checkPasswords(group: FormGroup): void | null {
     const password = group.controls.Password.value;
     const confirm = group.controls.Confirm.value;
 

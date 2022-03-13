@@ -1,18 +1,18 @@
-import { Account } from "./account";
-import { Role } from "./role";
+import { Account } from './account';
+import { Role } from './role';
 
 export class User {
-	id: number;
-	firstname: string;
-	lastname: string;
-	email: string;
-	birthday: Date;
-	password: string;
-	confirm?: string;
-	createdAt: Date;
-	updatedAt: Date;
-	deleted: boolean;
-	roles: Role[];
-	accounts: Account[];
+  id: number;
+  firstname: string;
+  lastname: string;
+  email: string;
+  birthday: Date;
+  password: string;
+  confirm?: string;
+  createdAt: Date;
+  updatedAt: Date;
+  deleted: boolean;
+  roles: Role[];
+  accounts: Account[];
 
 }

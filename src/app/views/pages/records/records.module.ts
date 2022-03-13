@@ -10,7 +10,8 @@ import { RecordsListComponent } from './records-list/records-list.component';
 
 const routes: Routes = [
   {
-    path: '', component: RecordsComponent,
+    path: '',
+    component: RecordsComponent,
     children: [
       {
         path: '',

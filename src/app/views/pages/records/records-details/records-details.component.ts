@@ -13,12 +13,12 @@ import { UtilService } from 'src/app/services/util.service';
 })
 export class RecordsDetailsComponent implements OnInit, AfterViewInit {
 
-  recordId: number = 0;
+  recordId = 0;
   record: Record;
 
   constructor(
     private router: Router,
-    private recordService : RecordService,
+    private recordService: RecordService,
     private activatedRoute: ActivatedRoute,
     private dataService: DataService,
     private spinner: NgxSpinnerService,
@@ -26,7 +26,7 @@ export class RecordsDetailsComponent implements OnInit, AfterViewInit {
   ) { }
 
   ngAfterViewInit(): void {
-    this.dataService.setOption('breadcrum','Record Details');
+    this.dataService.setOption('breadcrum', 'Record Details');
   }
 
   ngOnInit(): void {
@@ -37,11 +37,11 @@ export class RecordsDetailsComponent implements OnInit, AfterViewInit {
     this.getRecord();
   }
 
-  delete(event: any) {
+  delete(event: any): void {
     event.preventDefault();
 
-    this.utilService.confirmDialog("Are you sure you want to delete this record?", "<small class='text-danger'>Note: There is no Undo.</small>").then((res: any) => {
-      if (res) {
+    this.utilService.confirmDialog('Are you sure you want to delete this record?', '<small class="text-danger">Note: There is no Undo.</small>').then((confirm: any) => {
+      if (confirm) {
         this.spinner.show();
 
         this.recordService.delete(this.recordId).subscribe(res => {
@@ -51,9 +51,9 @@ export class RecordsDetailsComponent implements OnInit, AfterViewInit {
         }, err => {
           this.spinner.hide();
           console.warn(err);
-          this.utilService.errorHTML("", this.utilService.generateErrorMessage(err));
+          this.utilService.errorHTML('', this.utilService.generateErrorMessage(err));
         }, () => {
-          this.spinner.hide(); 
+          this.spinner.hide();
           }
         );
       }
@@ -69,9 +69,9 @@ export class RecordsDetailsComponent implements OnInit, AfterViewInit {
     }, err => {
       this.spinner.hide();
       console.warn(err);
-      this.utilService.errorHTML("", this.utilService.generateErrorMessage(err));
+      this.utilService.errorHTML('', this.utilService.generateErrorMessage(err));
     }, () => {
-      this.spinner.hide(); 
+      this.spinner.hide();
       }
     );
   }

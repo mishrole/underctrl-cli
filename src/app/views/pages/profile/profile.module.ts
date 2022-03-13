@@ -7,10 +7,12 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 const routes: Routes = [
   {
-    path: '', component: ProfileComponent,
+    path: '',
+    component: ProfileComponent,
     children: [
       {
-        path: '', component: ProfileEditComponent
+        path: '',
+        component: ProfileEditComponent
       }
     ]
   }

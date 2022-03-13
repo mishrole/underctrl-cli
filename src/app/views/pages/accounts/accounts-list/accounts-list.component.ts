@@ -30,7 +30,7 @@ export class AccountsListComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
-    let session = this.authService.getSession();
+    const session = this.authService.getSession();
     this.user = session?.user;
 
     this.getAccounts();
@@ -45,9 +45,9 @@ export class AccountsListComponent implements OnInit, AfterViewInit {
     }, err => {
       this.spinner.hide();
       console.warn(err);
-      this.utilService.errorHTML("", this.utilService.generateErrorMessage(err));
+      this.utilService.errorHTML('', this.utilService.generateErrorMessage(err));
     }, () => {
-      this.spinner.hide(); 
+      this.spinner.hide();
       }
     );
   }
