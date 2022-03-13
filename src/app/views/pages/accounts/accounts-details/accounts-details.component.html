@@ -7,11 +7,8 @@
 				<span>Back</span>
 			</a>
 			<div class="d-flex justify-content-end align-items-center gap-3">
-				<a [routerLink]="['/accounts/', account.id, 'edit']" class="btn btn-primary">
-					<i class='bx bx-pencil'></i>
-				</a>
-				<a href="" (click)="delete($event)" class="btn btn-danger">
-					<i class='bx bx-trash-alt'></i>
+				<a [routerLink]="['/accounts/', account.id, 'edit']" class="link-white fs-3">
+					<i class='bx bx-cog'></i>
 				</a>
 			</div>
 		</div>

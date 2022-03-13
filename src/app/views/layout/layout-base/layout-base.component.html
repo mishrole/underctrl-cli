@@ -32,7 +32,7 @@
             <div class="offcanvas-body">
                 <ul class="navbar-nav justify-content-start flex-grow-1 pe-3">
                     <li class="nav-item py-1" *ngFor="let menuItem of menu">
-                        <a [routerLink]="menuItem.url" class="nav-link d-flex align-items-center" data-bs-dismiss="offcanvas">
+                        <a [routerLink]="menuItem.url" routerLinkActive="active" class="nav-link d-flex align-items-center" data-bs-dismiss="offcanvas">
                             <i class="bx {{menuItem.icon}} fs-3"></i>
                             <span class="ps-4">{{menuItem.name}}</span>
                         </a>

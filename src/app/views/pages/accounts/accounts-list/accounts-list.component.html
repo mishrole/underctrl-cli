@@ -1,0 +1,43 @@
+<div class="container pt-4 mt-5">
+	<!-- Back arrow -->
+	<div class="row pt-2 pb-3">
+		<div class="d-flex justify-content-between align-items-center">
+			<a [routerLink]="['/home']" class="link-white d-flex align-items-center gap-2">
+				<i class='bx bx-arrow-back'></i>
+				<span>Back</span>
+			</a>
+		</div>
+	</div>
+
+    <div class="row py-3">
+        <div class="col-12 py-2" *ngFor="let account of accounts">
+            <div class="card" [routerLink]="['/accounts/', account.id, 'detail']">
+                <div class="card-body">
+                    <h5><i class='bx bx-wallet'></i> {{account.name}}</h5>
+                    <h2>{{account.currency.iso}} {{account.total | currency:'':''}}</h2>
+                </div>
+                <div class="card-footer">
+                    <div class="row">
+                        <div class="col-6 spending">
+                            <div class="d-flex flex-column justify-content-center align-items-start">
+                                <div class="py-1">
+                                    <p class="m-0"><i class='bx bxs-up-arrow'></i> Income</p>
+                                    <p class="m-0">{{account.income | currency:'':''}} {{account.currency.iso}}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6 spending">
+                            <div class="d-flex flex-column justify-content-center align-items-end">
+                                <div class="py-1">
+                                    <p class="m-0"><i class='bx bxs-down-arrow'></i> Expenses</p>
+                                    <p class="m-0 text-end">{{account.expense | currency:'':''}} {{account.currency.iso}}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -121,7 +121,7 @@ export class RecordsEditComponent implements OnInit, AfterViewInit {
       this.recordService.update(this.recordId, record).subscribe(res => {
         console.warn(res);
         this.utilService.success('Record updated');
-        this.router.navigate(['/home']);
+        this.router.navigate([`/records/${this.recordId}/detail`]);
       }, err => {
           this.spinner.hide();
           console.warn(err);

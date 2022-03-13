@@ -28,4 +28,12 @@ export class AccountService {
   save(account: any): Observable<BaseResponse<any>> {
     return this.http.post<any>(`${environment.api}/api/v1/accounts/`, account, this.authService.getHttpOptions('application/json'));
   }
+
+  update(id: number, account: any): Observable<BaseResponse<any>> {
+    return this.http.put<any>(`${environment.api}/api/v1/accounts/${id}`, account, this.authService.getHttpOptions('application/json'));
+  }
+
+  delete(id: number): Observable<BaseResponse<any>> {
+    return this.http.delete<any>(`${environment.api}/api/v1/accounts/${id}`, {headers: this.authService.getHeaderBearerToken()});
+  }
 }

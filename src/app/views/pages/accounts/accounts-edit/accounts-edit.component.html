@@ -1,0 +1,52 @@
+<div class="container pt-4 mt-5">
+	<!-- Back arrow -->
+	<div class="row pt-2 pb-3">
+		<div class="d-flex justify-content-between align-items-center">
+			<a [routerLink]="['/accounts', account.id, 'detail']" class="link-white d-flex align-items-center gap-2" *ngIf="account">
+				<i class='bx bx-arrow-back'></i>
+				<span>Back</span>
+			</a>
+
+			<a [routerLink]="['/home']" class="link-white d-flex align-items-center gap-2" *ngIf="!account">
+				<i class='bx bx-arrow-back'></i>
+				<span>Back</span>
+			</a>
+
+			<a href="" (click)="delete($event)" class="btn btn-danger">
+				<i class='bx bx-trash-alt'></i>
+			</a>
+		</div>
+	</div>
+	<!-- <h3 class="px-4 py-3 text-white">New Account</h3> -->
+	
+	<form [formGroup]="accountFormGroup" (ngSubmit)="updateAccount()" class="container px-4 pt-2">
+		<div class="row align-items-center justify-content-center mb-3">
+			<div class="col-12 mb-3">
+				<label for="name" class="form-label">Name</label>
+				<input type="text" class="form-control" id="name" formControlName="Name">
+				<div *ngIf="frmAccount['Name'].invalid && (frmAccount['Name'].dirty || frmAccount['Name'].touched)">
+					<span class="text-danger" *ngIf="frmAccount['Name'].hasError('required')">Name is required</span>
+				</div>
+			</div>
+
+			<div class="col-12 mb-3">
+				<label for="currency" class="form-label">Currency</label>
+				<select id="currency" formControlName="Currency" class="form-select">
+					<option selected value="">Select currency</option>
+					<option [value]="currency.id" *ngFor="let currency of currencies">
+						{{currency.name}}
+					</option>
+				</select>
+				<div *ngIf="frmAccount['Currency'].invalid && (frmAccount['Currency'].dirty || frmAccount['Currency'].touched)">
+					<span class="text-danger" *ngIf="frmAccount['Currency'].hasError('required')">Currency is required</span>
+				</div>
+			</div>
+			
+		</div>
+
+		<div class="d-flex flex-column">
+			<button type="submit" class="btn btn-primary flex-fill mb-2">Update Account</button>
+		</div>
+
+	</form>
+</div>

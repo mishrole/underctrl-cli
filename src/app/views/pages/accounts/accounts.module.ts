@@ -5,18 +5,29 @@ import { RouterModule, Routes } from '@angular/router';
 import { AccountsComponent } from './accounts.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AccountsDetailsComponent } from './accounts-details/accounts-details.component';
+import { AccountsEditComponent } from './accounts-edit/accounts-edit.component';
+import { AccountsListComponent } from './accounts-list/accounts-list.component';
 
 const routes: Routes = [
   {
     path: '', component: AccountsComponent,
     children: [
       {
-        path: 'new', component: AccountsAddComponent
+        path: '',
+        component: AccountsListComponent
+      },
+      {
+        path: 'new',
+        component: AccountsAddComponent
       },
       {
         path: ':id/detail',
         component: AccountsDetailsComponent
       },
+      {
+        path: ':id/edit',
+        component: AccountsEditComponent
+      }
     ]
   }
 ];
@@ -26,6 +37,8 @@ const routes: Routes = [
     AccountsComponent,
     AccountsAddComponent,
     AccountsDetailsComponent,
+    AccountsEditComponent,
+    AccountsListComponent,
   ],
   imports: [
     CommonModule,
