@@ -40,6 +40,7 @@ export class AccountsListComponent implements OnInit, AfterViewInit {
     this.spinner.show();
 
     this.accountService.allAccountsByOwner(this.user.id).subscribe(res => {
+      console.warn(res);
       this.accounts = res.data;
     }, err => {
       this.spinner.hide();

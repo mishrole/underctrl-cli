@@ -17,7 +17,12 @@ export class RecordService {
 
   allRecordsByAccount(id: number, filter: any): Observable<BaseResponse<any>> {
     let httpOptions = this.authService.getHttpOptionsWithParams('application/json', filter);
-    return this.http.get<any>(`${environment.api}/api/v1/records/account/${id}/search`, httpOptions)
+    return this.http.get<any>(`${environment.api}/api/v1/records/account/${id}/search`, httpOptions);
+  }
+
+  allRecordsByOwnerAndOrAccountAndFilters(id: number, filter: any): Observable<BaseResponse<any>> {
+    let httpOptions = this.authService.getHttpOptionsWithParams('application/json', filter);
+    return this.http.get<any>(`${environment.api}/api/v1/records/owner/${id}/search`, httpOptions);
   }
 
   save(record: any): Observable<BaseResponse<any>> {

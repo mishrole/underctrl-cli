@@ -12,51 +12,61 @@ import { UtilService } from 'src/app/services/util.service';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
-export class HomeComponent implements OnInit, AfterViewInit {
-
-  user: any;
-  balance: number;
-  accounts: Account[];
+export class HomeComponent implements OnInit, AfterViewInit{
 
   constructor(
-    private authService: AuthenticationService,
-    private accountService: AccountService,
-    private spinner: NgxSpinnerService,
-    private utilService: UtilService,
     private dataService: DataService
-  ) { }
+  ) {}
 
   ngAfterViewInit(): void {
     this.dataService.setOption('breadcrum', 'Home');
   }
 
-  ngOnInit(): void {
-    if (sessionStorage.getItem('auth') != null) {
-      const res = JSON.parse(sessionStorage.getItem('auth') || '{}');
-      // console.log('RES', res);
-      this.user = res.user;
-    }
+  ngOnInit(): void {}
 
-    this.getAccounts();
+  // user: any;
+  // balance: number;
+  // accounts: Account[];
+
+  // constructor(
+  //   private authService: AuthenticationService,
+  //   private accountService: AccountService,
+  //   private spinner: NgxSpinnerService,
+  //   private utilService: UtilService,
+  //   private dataService: DataService
+  // ) { }
+
+  // ngAfterViewInit(): void {
+  //   this.dataService.setOption('breadcrum', 'Home');
+  // }
+
+  // ngOnInit(): void {
+  //   if (sessionStorage.getItem('auth') != null) {
+  //     const res = JSON.parse(sessionStorage.getItem('auth') || '{}');
+  //     // console.log('RES', res);
+  //     this.user = res.user;
+  //   }
+
+  //   this.getAccounts();
     
-  }
+  // }
 
-  getAccounts(): void {
-    this.spinner.show();
+  // getAccounts(): void {
+  //   this.spinner.show();
 
-    this.accountService.allAccountsByOwner(this.user.id).subscribe(res => {
-      // console.log('allAccountsByOwner', res.data);
-      this.accounts = res.data;
-      // this.balance = this.calculateTotalBalance();
-    }, err => {
-      this.spinner.hide();
-      console.warn(err);
-      this.utilService.errorHTML("", this.utilService.generateErrorMessage(err));
-    }, () => {
-      this.spinner.hide(); 
-      }
-    );
-  }
+  //   this.accountService.allAccountsByOwner(this.user.id).subscribe(res => {
+  //     // console.log('allAccountsByOwner', res.data);
+  //     this.accounts = res.data;
+  //     // this.balance = this.calculateTotalBalance();
+  //   }, err => {
+  //     this.spinner.hide();
+  //     console.warn(err);
+  //     this.utilService.errorHTML("", this.utilService.generateErrorMessage(err));
+  //   }, () => {
+  //     this.spinner.hide(); 
+  //     }
+  //   );
+  // }
 
   // calculateTotalBalance(): number {
   //   let total = 0;

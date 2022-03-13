@@ -45,15 +45,14 @@ export class AccountsDetailsComponent implements OnInit {
   get frmAccount(): any { return this.accountFormGroup.controls; }
 
   ngOnInit(): void {
+    this.createAccountForm();
     this.activatedRoute.params.subscribe(res => {
       this.accountId = res.id ?? null;
       this.getAccountById();
       this.getRecordsFiltered();
     });
 
-    this.dataService.setOption('search', true);
-
-    this.createAccountForm();
+    // this.dataService.setOption('search', true);
   }
 
   // TODO: ADD PIPE TO CALL BOTH 
@@ -73,20 +72,20 @@ export class AccountsDetailsComponent implements OnInit {
     );
   }
 
-  getRecordsFiltered(): void {
-    this.spinner.show();
-    this.recordService.allRecordsByAccount(this.accountId, this.filter).subscribe(res => {
-      console.warn(res);
-      this.records = res.data;
-      }, err => {
-        this.spinner.hide();
-        console.warn(err);
-        this.utilService.errorHTML("", this.utilService.generateErrorMessage(err));
-      }, () => this.spinner.hide()
-    );
-  }
+  // getRecordsFiltered(): void {
+  //   this.spinner.show();
+  //   this.recordService.allRecordsByAccount(this.accountId, this.filter).subscribe(res => {
+  //     console.warn(res);
+  //     this.records = res.data;
+  //     }, err => {
+  //       this.spinner.hide();
+  //       console.warn(err);
+  //       this.utilService.errorHTML("", this.utilService.generateErrorMessage(err));
+  //     }, () => this.spinner.hide()
+  //   );
+  // }
 
-  filterRecords(): void {
+  getRecordsFiltered(): void {
     this.utilService.markFormTouched(this.accountFormGroup);
 
     if (this.accountFormGroup.valid) {
@@ -110,10 +109,5 @@ export class AccountsDetailsComponent implements OnInit {
       Keyword: ['']
     })
   }
-
-  delete(event: any): void {
-    
-  }
-
 
 }

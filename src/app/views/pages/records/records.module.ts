@@ -6,13 +6,19 @@ import { RecordsDetailsComponent } from './records-details/records-details.compo
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
 import { RecordsEditComponent } from './records-edit/records-edit.component';
+import { RecordsListComponent } from './records-list/records-list.component';
 
 const routes: Routes = [
   {
     path: '', component: RecordsComponent,
     children: [
       {
-        path: 'new', component: RecordsAddComponent
+        path: '',
+        component: RecordsListComponent
+      },
+      {
+        path: 'new',
+        component: RecordsAddComponent
       },
       {
         path: ':id/detail',
@@ -31,7 +37,8 @@ const routes: Routes = [
     RecordsComponent,
     RecordsAddComponent,
     RecordsDetailsComponent,
-    RecordsEditComponent
+    RecordsEditComponent,
+    RecordsListComponent
   ],
   imports: [
     CommonModule,
