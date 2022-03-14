@@ -136,8 +136,8 @@ export class AuthenticationService {
           {name: 'Home', url: '/home', icon: 'bx-home-alt'},
           {name: 'Accounts', url: '/accounts', icon: 'bx-wallet'},
           {name: 'Records', url: '/records', icon: 'bx-list-ul'},
-          {name: 'Spending', url: '/spending', icon: 'bxs-doughnut-chart'},
-          {name: 'Categories', url: '/categories', icon: 'bx-category-alt'},
+          // {name: 'Spending', url: '/spending', icon: 'bxs-doughnut-chart'},
+          // {name: 'Categories', url: '/categories', icon: 'bx-category-alt'},
           {name: 'Contacts', url: '/contacts', icon: 'bxs-contact'}
         ];
       }

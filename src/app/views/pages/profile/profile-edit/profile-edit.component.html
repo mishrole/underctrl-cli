@@ -1,1 +1,55 @@
-<p>profile-edit works!</p>
+<div class="container px-4 pt-4 mt-5 d-flex flex-column fixed-centered">
+  <!-- Back arrow -->
+	<div class="row pt-2 pb-3">
+		<div class="d-flex justify-content-between align-items-center">
+			<a [routerLink]="['/home']" class="link-white d-flex align-items-center gap-2">
+				<i class='bx bx-arrow-back'></i>
+				<span>Back</span>
+			</a>
+		</div>
+	</div>
+
+  <form [formGroup]="userFormGroup" (ngSubmit)="updateUser()" class="container px-4 pt-2 flex-grow-1">
+    <div class="row align-items-center justify-content-center mb-3">
+			<div class="col-6 mb-3">
+				<label for="firstname" class="form-label">First Name</label>
+				<input type="text" class="form-control" id="firstname" formControlName="Firstname">
+				<div *ngIf="frmUser['Firstname'].invalid && (frmUser['Firstname'].dirty || frmUser['Firstname'].touched)">
+					<span class="text-danger" *ngIf="frmUser['Firstname'].hasError('required')">Firstname is required</span>
+				</div>
+			</div>
+			<div class="col-6 mb-3">
+				<label for="lastname" class="form-label">Last Name</label>
+				<input type="text" class="form-control" id="lastname" formControlName="Lastname">
+				<div *ngIf="frmUser['Lastname'].invalid && (frmUser['Lastname'].dirty || frmUser['Lastname'].touched)">
+					<span class="text-danger" *ngIf="frmUser['Lastname'].hasError('required')">Lastname is required</span>
+				</div>
+			</div>
+			<div class="mb-3">
+				<label for="birthday" class="form-label">Date of birth</label>
+				<input type="date" class="form-control" id="birthday" max="{{today | date:'yyyy-MM-dd'}}" formControlName="Birthday">
+				<div *ngIf="frmUser['Birthday'].invalid && (frmUser['Birthday'].dirty || frmUser['Birthday'].touched)">
+					<span class="text-danger" *ngIf="frmUser['Birthday'].hasError('required')">Date of Birth is required</span>
+				</div>
+			</div>
+			<div class="mb-3">
+				<label for="email" class="form-label">Email</label>
+				<input type="email" class="form-control text-muted" id="email" formControlName="Email">
+				<div *ngIf="frmUser['Email'].invalid && (frmUser['Email'].dirty || frmUser['Email'].touched)">
+					<span class="text-danger" *ngIf="frmUser['Email'].hasError('required')">Email is required</span>
+					<span class="text-danger" *ngIf="frmUser['Email'].hasError('email')">Email is invalid</span>
+				</div>
+			</div>
+		</div>
+    <div class="d-flex flex-column mb-5">
+			<button type="submit" class="btn btn-primary flex-fill">Update</button>
+		</div>
+  </form>
+
+  <div class="horizontal-cta py-4" [routerLink]="['/profile/changepassword']">
+    <div class="d-flex justify-content-between align-items-center text-white" >
+      <span class="fw-bold">Password Change</span>
+      <i class='bx bx-chevron-right fs-3'></i>
+    </div>
+  </div>
+</div>

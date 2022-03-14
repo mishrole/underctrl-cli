@@ -123,3 +123,23 @@
 .ngx-charts text {
   fill: #a0aabe;
 }
+
+.text-muted {
+  color: var(--white-color-dark-text-disabled) !important;
+}
+
+.fixed-centered {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+}
+
+.horizontal-cta {
+  border-top: 1px solid var(--secondary-color-dark-full);
+}
+
+.horizontal-cta:hover {
+  cursor: pointer;
+}

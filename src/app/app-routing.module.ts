@@ -32,6 +32,10 @@ const routes: Routes = [
         loadChildren: () => import('./views/pages/records/records.module').then(m => m.RecordsModule), canActivate: [AuthGuard]
       },
       {
+        path: 'profile',
+        loadChildren: () => import('./views/pages/profile/profile.module').then(m => m.ProfileModule)
+      },
+      {
         path: '',
         redirectTo: 'home',
         pathMatch: 'full'

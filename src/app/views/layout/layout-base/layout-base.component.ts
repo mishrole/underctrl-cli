@@ -16,6 +16,7 @@ export class LayoutBaseComponent implements OnInit {
   breadcrum: any = 'Under CTRL';
   search = false;
   user: any;
+  hideFab = false;
 
   menu: MenuItem[];
 
@@ -27,24 +28,27 @@ export class LayoutBaseComponent implements OnInit {
     private changeDetectorRef: ChangeDetectorRef
   ) { }
 
-  ngOnInit(): void {
-    // It works but not as expected, routerlink doesn't change path so title remains as 'Home'
 
+  ngOnInit(): void {
+    // Observe changes in breadcrum
     this.dataService.subject.subscribe((res: any) => {
       this.breadcrum = res.breadcrum;
       this.search = res.search;
+      this.hideFab = res.hideFab;
+
+      if (res.profileUpdated) {
+        const session = this.authenticationService.getSession();
+        this.user = session?.user;
+      }
+
       // Avoid error NG0100
       this.changeDetectorRef.detectChanges();
     });
 
     if (sessionStorage.getItem('auth') != null) {
       const res = JSON.parse(sessionStorage.getItem('auth') || '{}');
-      // console.log('RES', res);
       this.user = res.user;
     }
-
-    // this.routes = this.router.url.split('/');
-    // this.routes = window.location.pathname.split('/').filter(element => element);
 
     this.menu = this.authenticationService.loadMenuItems(this.user);
   }

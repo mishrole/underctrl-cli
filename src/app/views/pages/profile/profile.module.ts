@@ -4,6 +4,7 @@ import { ProfileComponent } from './profile.component';
 import { RouterModule, Routes } from '@angular/router';
 import { ProfileEditComponent } from './profile-edit/profile-edit.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ProfileChangepasswordComponent } from './profile-changepassword/profile-changepassword.component';
 
 const routes: Routes = [
   {
@@ -13,6 +14,10 @@ const routes: Routes = [
       {
         path: '',
         component: ProfileEditComponent
+      },
+      {
+        path: 'changepassword',
+        component: ProfileChangepasswordComponent
       }
     ]
   }
@@ -21,7 +26,8 @@ const routes: Routes = [
 @NgModule({
   declarations: [
     ProfileComponent,
-    ProfileEditComponent
+    ProfileEditComponent,
+    ProfileChangepasswordComponent
   ],
   imports: [
     CommonModule,

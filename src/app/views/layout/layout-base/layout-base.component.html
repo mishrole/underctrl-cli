@@ -12,7 +12,7 @@
         <!-- Sidemenu -->
         <div class="offcanvas offcanvas-start offcanvas-bg-dark" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
             <div class="offcanvas-header bg-dark py-5">
-                <div class="col-10 d-flex profile-header" [routerLink]="['/profile']">
+                <div class="col-10 d-flex profile-header" [routerLink]="['/profile']" data-bs-dismiss="offcanvas">
                     <div class="col-2 fs-1">
                         <i class='bx bx-user'></i>
                     </div>
@@ -57,27 +57,34 @@
     <router-outlet></router-outlet>
 
     <!-- FAB Button -->
-    <div id="container-floating">
+    <div id="container-floating" [ngClass]="hideFab ? 'd-none' : ''">
+        <!-- <a [routerLink]="['/accounts/new']">
+          <div class="nd5 nds" data-original-title="Accounts" data-placement="left" data-toggle="tooltip">
+              <p class="letter"><i class='bx bx-wallet'></i></p>
+              <div class="quick-term">Add Account</div>
+          </div>
+      </a> -->
+
         <a [routerLink]="['/accounts/new']">
-            <div class="nd5 nds" data-original-title="Accounts" data-placement="left" data-toggle="tooltip">
+            <div class="nd4 nds" data-original-title="Accounts" data-placement="left" data-toggle="tooltip">
                 <p class="letter"><i class='bx bx-wallet'></i></p>
                 <div class="quick-term">Add Account</div>
             </div>
         </a>
         
         <a [routerLink]="['/records/new']">
-            <div class="nd4 nds" data-original-title="Records" data-placement="left" data-toggle="tooltip">
+            <div class="nd3 nds" data-original-title="Records" data-placement="left" data-toggle="tooltip">
                 <p class="letter"><i class='bx bx-list-ul'></i></p>
-                <div class="quick-term">Add Record</div>
+                <div class="quick-term">Add Records</div>
             </div>
         </a>
 
-        <a [routerLink]="['/categories/new']" target="_blank">
+        <!-- <a [routerLink]="['/categories/new']" target="_blank">
             <div class="nd3 nds" data-original-title="Categories" data-placement="left" data-toggle="tooltip">
                 <p class="letter"><i class='bx bx-category-alt'></i></p>
                 <div class="quick-term">Categories</div>
             </div>
-        </a>
+        </a> -->
 
         <a [routerLink]="['/contacts/new']">
             <div class="nd1 nds" data-original-title="Contacts" data-placement="left" data-toggle="tooltip">
